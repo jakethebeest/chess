@@ -6,62 +6,364 @@ this.y=ys;
 this.type=types;
 this.h=0;
 this.pressed=0;
+this.gy=[];
+this.k=0;
+this.gx=[];
+this.moooved=0;
 }	
 	
-	king(){
+	king(p){
 		if(this.h==0){
 			this.img=createImg("king.png");
 		this.img.class('picbdd');
 		this.h=1;
 	}
-		if(
-		mouseIsPressed||this.pressed==1){
-			fill(0,255,0);
-			rect((this.x-1-1)*55,(this.y-1-1)*55,55,55);
-			xy[this.x-1-1][this.y-1-1]="green";
-			rect((this.x-1)*55,(this.y-1-1)*55,55,55);
-			rect((this.x+1-1)*55,(this.y-1-1)*55,55,55);
-			rect((this.x+1-1)*55,(this.y-1)*55,55,55);
-			rect((this.x+1-1)*55,(this.y+1-1)*55,55,55);
-			rect((this.x-1)*55,(this.y+1-1)*55,55,55);
-			rect((this.x-1-1)*55,(this.y+1-1)*55,55,55);
-			rect((this.x-1-1)*55,(this.y-1)*55,55,55);
+
+		if(p.ckrange(this.x,this.y)||this.pressed==1){
+			p.ckgreen(this.x+1,this.y);
+			p.ckgreen(this.x-1,this.y);
+			p.ckgreen(this.x+1,this.y+1);
+			p.ckgreen(this.x,this.y+1);
+			p.ckgreen(this.x-1,this.y+1);
+			p.ckgreen(this.x+1,this.y-1);
+			p.ckgreen(this.x,this.y-1);
+			p.ckgreen(this.x-1,this.y-1);
+		    
 			this.pressed=1;
 			
 		}
-		
-	this.img.position((this.x-1)*55+127.5,(this.y-1)*55+127.5);
-		xy[this.x][this.y]="filled"
-//		fill(250,50,0);
-	text("test"+this.x,10,10);
-	}
-	move(){
-	//	loadPixels();
-		if(
-		mouseX<=xy[this.x-1-1][this.y-1-1]*55-10
-		&& mouseX>=xy[this.x-1-1][this.y-1-1]*55+10
-		&& mouseY<=xy[this.x-1-1][this.y-1-1]*55-10
-		&& mouseY>=xy[this.x-1-1][this.y-1-1]*55+10
-		&& mouseIsPressed
-		&& xy[this.x-1-1][this.y-1-1]=="green"){
-			this.x-=1;
-			this.y-=1;
-			this.pressed=0;
+		else{
+			
+
 			
 		}
-		//updatePixels();
+	this.img.position(this.x*60+120,this.y*60+120);
+		xy[this.x][this.y]="king";
+		//stroke(0,200,0);
+
+	}
+	
+	
+	move(p){
+     for (let j=1;j<9;j++){
+		for (let l=1;l<9;l++){
+		if(this.gx[j]=="green"&&this.gy[l]=="green" && ((j!=this.x)||(l!=this.y)) &&xy[j][l]=="green"   ){
+				fill(0,255,0);
+					
+			rect(j*60,l*60,60,60);
+			if(p.ckrange(j,l)){
+			xy[this.x][this.y]="empty";
+			this.mooved=1;
+			
+			this.x=j;
+			this.y=l;
+			this.pressed=0;
+			p.remove_green()
+	 	  this.k++;
+		  
+			}
+		}
+
+	 }
+	 }
+	 
+}
+
+
+	ckgreen(x,y){
+			if(xy[x][y]=="empty"){
+				fill(0,260,0);
+			rect(x*60,y*60,60,60);
+			this.gx[x]="green"
+			this.gy[y]="green"
+			xy[x][y]="green"
+			}
+			
+		
 		
 	}
-	queen(x,y){}
+	remove_green(){
+			  for (let g=1;g<10;g++){
+		for (let e=1;e<10;e++){
+		
+			this.gx[g]="empty"
+			this.gy[e]="empty"
+			xy[g][e]="empty"
+		}
+	  }
+		
+		
+	}
+	
+	
+	ckrange(x,y){
+		
+			if(
+		mouseX>=(x)*60
+		&& mouseX<=(x)*60+60
+		&& mouseY>=(y)*60
+		&& mouseY<=(y)*60+60
+		&& mouseIsPressed
+		){
+			return true;
+			
+		}
+			else {
+				return false;
+			}
+		}
+	
+	queen(p){
+		if(this.h==0){
+			this.img=createImg("queen.png");
+		this.img.class('picbdd');
+		this.h=1;
+	}
+
+		if(p.ckrange(this.x,this.y)||this.pressed==1){
+			
+			// move down right
+			for(let j=1;j<8;j++){
+				if(this.x+j<9){
+				if(this.y+j<9){
+				if(xy[this.x+j][this.y+j]=="empty"){
+					p.ckgreen(this.x+j,this.y+j);
+					
+				}
+				else{
+				j=10;
+				}}}}
+				//move down left
+		   for(let j=1;j<8;j++){
+				if(this.x-j>0){
+				if(this.y+j<9){
+				if(xy[this.x-j][this.y+j]=="empty"){
+					p.ckgreen(this.x-j,this.y+j);
+					
+				}
+				else{
+				j=10;
+				}}}}
+				//move up left
+		   for(let j=1;j<8;j++){
+				if(this.x-j>0){
+				if(this.y-j>0){
+				if(xy[this.x-j][this.y-j]=="empty"){
+					p.ckgreen(this.x-j,this.y-j);
+					
+				}
+				else{
+				j=10;
+				}}}}
+				//move up right
+		   for(let j=1;j<8;j++){
+				if(this.x+j<9){
+				if(this.y-j>0){
+				if(xy[this.x+j][this.y-j]=="empty"){
+					p.ckgreen(this.x+j,this.y-j);
+					
+				}
+				else{
+				j=10;
+				}}}}
+				//move up
+				for(let j=1;j<8;j++){
+				
+				if(this.y+j<9){
+					if(xy[this.x][this.y+j]=="empty"){
+					p.ckgreen(this.x,this.y+j);
+					
+				}
+				else{
+				j=10;
+				}}}
+				//move down
+				for(let j=1;j<8;j++){
+				
+				if(this.y-j>0){
+					if(xy[this.x][this.y-j]=="empty"){
+					p.ckgreen(this.x,this.y-j);
+					
+				}
+				else{
+				j=10;
+				}}}
+				//move right
+				for(let j=1;j<8;j++){
+				
+				if(this.x+j<9){
+					if(xy[this.x+j][this.y]=="empty"){
+					p.ckgreen(this.x+j,this.y);
+					
+				}
+				else{
+				j=10;
+				}}}
+				//move left
+				for(let j=1;j<8;j++){
+				
+				if(this.x-j>0){
+					if(xy[this.x-j][this.y]=="empty"){
+					p.ckgreen(this.x-j,this.y);
+					
+				}
+				else{
+				j=10;
+				}}}
+			this.pressed=1;	
+		}
+	
+		this.img.position(this.x*60+120,this.y*60+120);
+		xy[this.x][this.y]="filled";
+	
+	}
+	
+	
+	
 	knight(x,y){}
-	bish(x,y){}
-	rook(x,y){}
-	pong(x,y){}
+	bish(p){
+		if(this.h==0){
+			this.img=createImg("bish.png");
+		this.img.class('picbdd');
+		this.h=1;
+	}
+
+		if(p.ckrange(this.x,this.y)||this.pressed==1){
+			
+			// move down right
+			for(let j=1;j<8;j++){
+				if(this.x+j<9){
+				if(this.y+j<9){
+				if(xy[this.x+j][this.y+j]=="empty"){
+					p.ckgreen(this.x+j,this.y+j);
+					
+				}
+				else{
+				j=10;
+				}}}}
+				//move down left
+		   for(let j=1;j<8;j++){
+				if(this.x-j>0){
+				if(this.y+j<9){
+				if(xy[this.x-j][this.y+j]=="empty"){
+					p.ckgreen(this.x-j,this.y+j);
+					
+				}
+				else{
+				j=10;
+				}}}}
+				//move up left
+		   for(let j=1;j<8;j++){
+				if(this.x-j>0){
+				if(this.y-j>0){
+				if(xy[this.x-j][this.y-j]=="empty"){
+					p.ckgreen(this.x-j,this.y-j);
+					
+				}
+				else{
+				j=10;
+				}}}}
+				//move up right
+		   for(let j=1;j<8;j++){
+				if(this.x+j<9){
+				if(this.y-j>0){
+				if(xy[this.x+j][this.y-j]=="empty"){
+					p.ckgreen(this.x+j,this.y-j);
+					
+				}
+				else{
+				j=10;
+				}}}}
+		this.pressed=1;	
+		}
+	
+		this.img.position(this.x*60+120,this.y*60+120);
+		xy[this.x][this.y]="filled";
+		
+	}
+	rook(p){
+		if(this.h==0){
+			this.img=createImg("rook.png");
+		this.img.class('picbdd');
+		this.h=1;
+	}
+
+		if(p.ckrange(this.x,this.y)||this.pressed==1){
+			
+			for(let j=1;j<8;j++){
+				
+				if(this.y+j<9){
+					if(xy[this.x][this.y+j]=="empty"){
+					p.ckgreen(this.x,this.y+j);
+					
+				}
+				else{
+				j=10;
+				}}}
+				//move down
+				for(let j=1;j<8;j++){
+				
+				if(this.y-j>0){
+					if(xy[this.x][this.y-j]=="empty"){
+					p.ckgreen(this.x,this.y-j);
+					
+				}
+				else{
+				j=10;
+				}}}
+				//move right
+				for(let j=1;j<8;j++){
+				
+				if(this.x+j<9){
+					if(xy[this.x+j][this.y]=="empty"){
+					p.ckgreen(this.x+j,this.y);
+					
+				}
+				else{
+				j=10;
+				}}}
+				//move left
+				for(let j=1;j<8;j++){
+				
+				if(this.x-j>0){
+					if(xy[this.x-j][this.y]=="empty"){
+					p.ckgreen(this.x-j,this.y);
+					
+				}
+				else{
+				j=10;
+				}}}
+		this.pressed=1;	
+		}
+	
+		this.img.position(this.x*60+120,this.y*60+120);
+		xy[this.x][this.y]="filled";
+	
+	}
+	pong(p){
+		if(this.h==0){
+			this.img=createImg("pong.png");
+		this.img.class('picbdd');
+		this.h=1;
+		
+	}
+		if(p.ckrange(this.x,this.y)||this.pressed==1){
+			p.ckgreen(this.x,this.y-1);
+			if(this.moooved==0){
+				p.ckgreen(this.x,this.y-2);
+			}
+			
+			
+		}
+		this.img.position(this.x*60+120,this.y*60+120);
+		xy[this.x][this.y]="filled";
+		
+	}
 	display(){
 		
 	
 	}
-	
+	 
 	
 }
 
