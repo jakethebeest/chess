@@ -14,7 +14,7 @@ function setup(){
 		}
 	  }
 	b=new bord();
-	p=new piece(2,2,"white");
+	p=new piece(2,2,"black");
 	p2=new piece(3,3,"white");
 	p3=new piece(4,6,"white");
 	p4=new piece(2,8,"whtie");
