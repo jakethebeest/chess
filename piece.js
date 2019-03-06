@@ -164,7 +164,7 @@ this.moooved=0;
 	}
 
 		if(p.ckrange(this.x,this.y)||this.pressed==1){
-			
+			if((this.type=="white"&&lockwhite==false)||(this.type=="black"&&lockblack==false)){
 			// move down right
 			for(let j=1;j<8;j++){
 				if(this.x+j<9){
@@ -253,9 +253,10 @@ this.moooved=0;
 				else{
 				j=10;
 				}}}
-			this.pressed=1;	
+			}		
+		this.pressed=1;	
+		
 		}
-	
 		this.img.position(this.x*60+120,this.y*60+120);
 		xy[this.x][this.y]="filled";
 	
