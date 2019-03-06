@@ -14,7 +14,12 @@ this.moooved=0;
 	
 	king(p){
 		if(this.h==0){
+			if(this.type=="white"){
 			this.img=createImg("king.png");
+			}
+			if(this.type=="black"){
+			this.img=createImg("(black) king.png");
+			}
 		this.img.class('picbdd');
 		this.h=1;
 	}

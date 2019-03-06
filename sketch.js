@@ -14,11 +14,11 @@ function setup(){
 		}
 	  }
 	b=new bord();
-	p=new piece(2,2,"king");
-	p2=new piece(3,3,"king");
-	p3=new piece(4,6,"bish");
-	p4=new piece(2,8,"bish");
-	p5=new piece(2,7,"bish");
+	p=new piece(2,2,"black");
+	p2=new piece(3,3,"white");
+	p3=new piece(4,6,"white");
+	p4=new piece(2,8,"whtie");
+	p5=new piece(2,7,"white");
 		//image(Iking,27.7,27.7);
 
 
