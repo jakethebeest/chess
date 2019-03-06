@@ -1,6 +1,8 @@
 let b;let img;
 let can;let p,p2,p3,p4,p5,p6;
-let xy=[]
+let xy=[];
+let lockwhite=false;
+let lockblack=true;
 function setup(){
 	can=createCanvas(600,600);
 	can.position(100,100);can.class("bdd");

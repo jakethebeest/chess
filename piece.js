@@ -25,6 +25,7 @@ this.moooved=0;
 	}
 
 		if(p.ckrange(this.x,this.y)||this.pressed==1){
+			if(this.type=="black"&&lockblack==false){
 			p.ckgreen(this.x+1,this.y);
 			p.ckgreen(this.x-1,this.y);
 			p.ckgreen(this.x+1,this.y+1);
@@ -33,8 +34,19 @@ this.moooved=0;
 			p.ckgreen(this.x+1,this.y-1);
 			p.ckgreen(this.x,this.y-1);
 			p.ckgreen(this.x-1,this.y-1);
-		    
 			this.pressed=1;
+			}
+			if(this.type=="white"&&lockwhite==false){
+			p.ckgreen(this.x+1,this.y);
+			p.ckgreen(this.x-1,this.y);
+			p.ckgreen(this.x+1,this.y+1);
+			p.ckgreen(this.x,this.y+1);
+			p.ckgreen(this.x-1,this.y+1);
+			p.ckgreen(this.x+1,this.y-1);
+			p.ckgreen(this.x,this.y-1);
+			p.ckgreen(this.x-1,this.y-1);
+			this.pressed=1;
+			}
 			
 		}
 		else{
@@ -50,6 +62,7 @@ this.moooved=0;
 	
 	
 	move(p){
+		if(this.type=="white"){
      for (let j=1;j<9;j++){
 		for (let l=1;l<9;l++){
 		if(this.gx[j]=="green"&&this.gy[l]=="green" && ((j!=this.x)||(l!=this.y)) &&xy[j][l]=="green"   ){
@@ -59,7 +72,8 @@ this.moooved=0;
 			if(p.ckrange(j,l)){
 			xy[this.x][this.y]="empty";
 			this.mooved=1;
-			
+		    lockwhite=true;
+			lockblack=false;
 			this.x=j;
 			this.y=l;
 			this.pressed=0;
@@ -71,7 +85,31 @@ this.moooved=0;
 
 	 }
 	 }
-	 
+		}
+		if(this.type=="black"){
+     for (let j=1;j<9;j++){
+		for (let l=1;l<9;l++){
+		if(this.gx[j]=="green"&&this.gy[l]=="green" && ((j!=this.x)||(l!=this.y)) &&xy[j][l]=="green"   ){
+				fill(0,255,0);
+					
+			rect(j*60,l*60,60,60);
+			if(p.ckrange(j,l)){
+			xy[this.x][this.y]="empty";
+			this.mooved=1;
+		    lockwhite=false;
+			lockblack=true;
+			this.x=j;
+			this.y=l;
+			this.pressed=0;
+			p.remove_green()
+	 	  this.k++;
+		  
+			}
+		}
+
+	 }
+	 }
+		}
 }
 
 
