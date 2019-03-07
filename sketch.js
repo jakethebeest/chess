@@ -21,6 +21,7 @@ function setup(){
 	p3=new piece(4,6,"white");
 	p4=new piece(2,8,"whtie");
 	p5=new piece(2,7,"white");
+	p6=new piece(5,5,"black");
 		//image(Iking,27.7,27.7);
 
 
@@ -40,6 +41,9 @@ p4.rook(p4);
 p4.move(p4);
 p5.pong(p5);
 p5.move(p5);
+p6.knight(p6);
+p6.move(p6);
+
 	}
 	function mousePressed(){
 	

@@ -71,7 +71,7 @@ this.moooved=0;
 			rect(j*60,l*60,60,60);
 			if(p.ckrange(j,l)){
 			xy[this.x][this.y]="empty";
-			this.mooved=1;
+			this.moooved=1;
 		    lockwhite=true;
 			lockblack=false;
 			this.x=j;
@@ -95,7 +95,7 @@ this.moooved=0;
 			rect(j*60,l*60,60,60);
 			if(p.ckrange(j,l)){
 			xy[this.x][this.y]="empty";
-			this.mooved=1;
+			this.moooved=1;
 		    lockwhite=false;
 			lockblack=true;
 			this.x=j;
@@ -114,6 +114,7 @@ this.moooved=0;
 
 
 	ckgreen(x,y){
+		if(x>0&&y>0&&x<10&&x<10){
 			if(xy[x][y]=="empty"){
 				fill(0,260,0);
 			rect(x*60,y*60,60,60);
@@ -121,7 +122,7 @@ this.moooved=0;
 			this.gy[y]="green"
 			xy[x][y]="green"
 			}
-			
+		}
 		
 		
 	}
@@ -264,7 +265,34 @@ this.moooved=0;
 	
 	
 	
-	knight(x,y){}
+	knight(p){
+		if(this.h==0){
+			if(this.type=="white"){
+			this.img=createImg("knight.png");
+			}
+			if(this.type=="black"){
+			this.img=createImg("(black) knight.png");
+			}
+		this.img.class('picbdd');
+		this.h=1;
+	}
+		if(p.ckrange(this.x,this.y)||this.pressed==1){
+			if(p.ckrange(this.x,this.y)||this.pressed==1){
+			p.ckgreen(this.x-2,this.y+1);
+			p.ckgreen(this.x-2,this.y-1);
+			p.ckgreen(this.x+2,this.y+1);
+			p.ckgreen(this.x+2,this.y-1);
+			
+			p.ckgreen(this.x+1,this.y-2);
+			p.ckgreen(this.x-1,this.y-2);
+			p.ckgreen(this.x+1,this.y+2);
+			p.ckgreen(this.x-1,this.y+2);
+			
+			}
+		}
+		this.img.position(this.x*60+120,this.y*60+120);
+		xy[this.x][this.y]="filled";
+	}
 	bish(p){
 		if(this.h==0){
 			this.img=createImg("bish.png");

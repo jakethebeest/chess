@@ -1,20 +1,19 @@
 class bord{
-	//let x;
-	//let y;
-	//let plce1;
 	
-	//constructor 
-	bord(){
-	let	plce1;
+	
+	constructor(){
+	let	p=[];
 		
-		rectmode(CENTER);
-	 //y=[];
-	 //x=[];
-	 plce1=[];
-	for (let j=1;j<9;j++){
-		plce1[j]=[];
-		
-	}
+
+	 
+	 for(let j=0;j<32;j++){
+		 if(j<9)
+		 p[j]=new piece(j+1,1,"black");
+		 else if(j<16) p[j]=new piece(j+1,2,"black");
+		 else if(j<25)  p[j]=new piece(j+1,7,"white");
+		 else if(j<32)  p[j]=new piece(j+1,8,"white");
+	 }
+	
 	}
 
 
@@ -33,15 +32,14 @@ class bord{
 		
 		}
 		}
-	
-		
+	}
+		piece_setup(){
+			
+			
+		}
 		
 		
 	}
-	display(p){
-//	ellipse(27.5*p.king.x,27.5,25,25);
-	p.king();
-	}
 	
-}
+
 
