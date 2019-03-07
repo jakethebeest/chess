@@ -320,7 +320,7 @@ this.moooved=0;
 				}}}}
 		this.pressed=1;	
 		}
-	
+	else {}
 		this.img.position(this.x*60+120,this.y*60+120);
 		xy[this.x][this.y]="filled";
 		
