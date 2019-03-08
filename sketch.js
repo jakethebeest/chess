@@ -1,5 +1,5 @@
 let b;let img;
-let can;let p,p2,p3,p4,p5,p6;
+let can;
 let xy=[];
 let lockwhite=false;
 let lockblack=true;
@@ -16,12 +16,9 @@ function setup(){
 		}
 	  }
 	b=new bord();
-	p=new piece(2,2,"black");
-	p2=new piece(3,3,"white");
-	p3=new piece(4,6,"white");
-	p4=new piece(2,8,"whtie");
-	p5=new piece(2,7,"white");
-	p6=new piece(5,5,"black");
+	//b.piece_setup();
+	//p=new piece(2,2,"black");
+
 		//image(Iking,27.7,27.7);
 
 
@@ -29,20 +26,7 @@ function setup(){
 function draw(){
 	background(255);
 b.bord_setup();
-p.king(p);	
-//p.display();
-p.move(p);
-p2.move(p2);
-p2.queen(p2);
-
-p3.bish(p3);
-p3.move(p3);
-p4.rook(p4);
-p4.move(p4);
-p5.pong(p5);
-p5.move(p5);
-p6.knight(p6);
-p6.move(p6);
+b.piece_setup();
 
 	}
 	function mousePressed(){

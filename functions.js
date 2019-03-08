@@ -1,17 +1,18 @@
+let	p=[];
 class bord{
 	
 	
 	constructor(){
-	let	p=[];
+	
 		
 
 	 
-	 for(let j=0;j<32;j++){
+	 for(let j=1;j<33;j++){
 		 if(j<9)
-		 p[j]=new piece(j+1,1,"black");
-		 else if(j<16) p[j]=new piece(j+1,2,"black");
-		 else if(j<25)  p[j]=new piece(j+1,7,"white");
-		 else if(j<32)  p[j]=new piece(j+1,8,"white");
+		 p[j]=new piece(j,1,"black");
+		 else if(j<17) p[j]=new piece(j-8,2,"black");
+		 else if(j<26)  p[j]=new piece(j-16,7,"white");
+		 else if(j<33)  p[j]=new piece(j-24,8,"white");
 	 }
 	
 	}
@@ -34,8 +35,14 @@ class bord{
 		}
 	}
 		piece_setup(){
-			
-			
+			for(let j=1;j<9;j++){
+			p[j+8].move(p[j+8]);
+			p[j+8].pong(p[j+8]);
+			}
+			for(let j=1;j<9;j++){
+			p[j+16].move(p[j+16]);
+			p[j+16].pong(p[j+16]);
+			}
 		}
 		
 		

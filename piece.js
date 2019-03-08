@@ -414,18 +414,33 @@ this.moooved=0;
 	}
 	pong(p){
 		if(this.h==0){
+			if (this.type=="white"){
 			this.img=createImg("pong.png");
 		this.img.class('picbdd');
 		this.h=1;
-		
+			}
+			else {
+					this.img=createImg("(black) pong.png");
+		this.img.class('picbdd');
+		this.h=1;
+				
+				
+			}
 	}
 		if(p.ckrange(this.x,this.y)||this.pressed==1){
+			if(this.type=="white"){
+			
 			p.ckgreen(this.x,this.y-1);
 			if(this.moooved==0){
 				p.ckgreen(this.x,this.y-2);
 			}
-			
-			
+			}
+			else {
+				p.ckgreen(this.x,this.y+1);
+			if(this.moooved==0){
+				p.ckgreen(this.x,this.y+2);
+			}
+			}
 		}
 		this.img.position(this.x*60+120,this.y*60+120);
 		xy[this.x][this.y]="filled";
