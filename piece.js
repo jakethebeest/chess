@@ -431,13 +431,13 @@ this.moooved=0;
 			if(this.type=="white"){
 			
 			p.ckgreen(this.x,this.y-1);
-			if(this.moooved==0){
+			if(this.moooved==0&&xy[this.x][this.y-1]!="filled"){
 				p.ckgreen(this.x,this.y-2);
 			}
 			}
 			else {
 				p.ckgreen(this.x,this.y+1);
-			if(this.moooved==0){
+			if(this.moooved==0&&xy[this.x][this.y+1]!="filled"){
 				p.ckgreen(this.x,this.y+2);
 			}
 			}

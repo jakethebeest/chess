@@ -3,15 +3,15 @@ class bord{
 	
 	
 	constructor(){
-	
+	this.pressed=[];
 		
 
 	 
 	 for(let j=1;j<33;j++){
 		 if(j<9)
 		 p[j]=new piece(j,1,"black");
-		 else if(j<17) p[j]=new piece(j-8,2,"black");
-		 else if(j<26)  p[j]=new piece(j-16,7,"white");
+		 else if(j<17){ p[j]=new piece(j-8,2,"black");this.pressed[j]="undeturmened";}
+		 else if(j<26) { p[j]=new piece(j-16,7,"white");this.pressed[j]="undeturmened";}
 		 else if(j<33)  p[j]=new piece(j-24,8,"white");
 	 }
 	
@@ -36,13 +36,41 @@ class bord{
 	}
 		piece_setup(){
 			for(let j=1;j<9;j++){
+			if(p[j+8].y==9||this.pressed[j+8]!="undeturmened"){
+				
+				//lockwhite=true;
+				if(key=='q'||this.pressed[j+8]=="q"){
+			this.pressed[j+8]=="q";
+			p[j+8].move(p[j+8]);
+			p[j+8].queen(p[j+8]);
+				}
+				else if(key=='k'||this.pressed[j+8]=="k"){
+					this.pressed[j+8]=="k";
+			p[j+8].move(p[j+8]);
+			p[j+8].knight(p[j+8]);
+				}
+				else if(key=='r'||this.pressed[j+8]=="r"){
+			p[j+8].move(p[j+8]);
+			p[j+8].rook(p[j+8]);
+			this.pressed[j+8]=="r";
+				}
+				else if(key=='b'||this.pressed[j+8]=="b"){
+			p[j+8].move(p[j+8]);
+			p[j+8].bish(p[j+8]);		
+			this.pressed[j+8]=="b";
+				}
+			}
+			else {
 			p[j+8].move(p[j+8]);
 			p[j+8].pong(p[j+8]);
-			}
+			
+			}/*
 			for(let j=1;j<9;j++){
 			p[j+16].move(p[j+16]);
 			p[j+16].pong(p[j+16]);
 			}
+			*/
+		}
 		}
 		
 		
