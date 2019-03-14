@@ -2,7 +2,7 @@ let b;let img;
 let can;
 let xy=[];
 let lockwhite=false;
-let lockblack=false;
+let lockblack=true;
 function setup(){
 	can=createCanvas(600,600);
 	can.position(100,100);can.class("bdd");
@@ -28,8 +28,8 @@ function draw(){
 b.bord_setup();
 b.piece_setup();
 fill(200,0,0);
-text(lockwhite,100,100);
-text(lockblack,150,100);
+text(lockwhite,550,100);
+text(lockblack,550,150);
 	}
 	function mousePressed(){
 	
