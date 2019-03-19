@@ -38,7 +38,8 @@ class bord{
 	}
 		piece_setup(){
 			for(let j=1;j<9;j++){
-			if(p[j+8].y==8||pressed[j+8]!="undeturmened"){
+if(p[j+8]!="nill"){		
+		if(p[j+8].y==8||pressed[j+8]!="undeturmened"){
 				
 				//lockwhite=true;
 				if(key=='q'&&keyIsPressed
@@ -82,12 +83,15 @@ class bord{
 			
 			}
 			}
+			}
 //======================================================================================================================================}
 		
 	for(let j=1;j<9;j++){
+		if(p[j+16]!="nill"){
 			if(p[j+16].y==0||pressed[j+16]!="undeturmened"){
 				
 				//lockwhite=true;
+				
 				if(key=='q'&&keyIsPressed
 				&&pressed[j+16]!="b"
 				&&pressed[j+16]!="r"
@@ -123,35 +127,95 @@ class bord{
 			pressed[j+16]="b";
 				}
 			}
+			
+			
 			else {
 			p[j+16].move(p[j+16]);
 			p[j+16].pong(p[j+16]);
 			
 			}
-		
+			
+			}
 	}
 //===============================================================================================
  for(let j=1;j<33;j++){
 	 p[j].move(p[j])
  }
+ if(p[1]!="nill"){
 p[1].rook(p[1]);
+ }
+ if(p[2]!="nill"){
 p[2].knight(p[2]);
+ }
+if(p[3]!="nill"){
 p[3].bish(p[3]);
+}
+if(p[4]!="nill"){
 p[4].queen(p[4]);
+}
+if(p[5]!="nill"){
 p[5].king(p[5]);
+}
+if(p[6]!="nill"){
 p[6].bish(p[6]);
+}
+if(p[7]!="nill"){
 p[7].knight(p[7]);
+}
+if(p[8]!="nill"){
 p[8].rook(p[8]);
+}
 
+if(p[25]!="nill"){
 p[25].rook(p[25]);
+}
+if(p[26]!="nill"){
 p[26].knight(p[26]);
+}
+if(p[27]!="nill"){
 p[27].bish(p[27]);
+}
+if(p[28]!="nill"){
 p[28].queen(p[28]);
+}
+if(p[29]!="nill"){
 p[29].king(p[29]);
+}
+if(p[30]!="nill"){
 p[30].bish(p[30]);
+}
+if(p[31]!="nill"){
 p[31].knight(p[31]);
+}
+if(p[32]!="nill"){
 p[32].rook(p[32]);
+}
+}
 
+murder(){
+for(let j=1;j<17;j++){
+for(let l=17;l<33;l++){
+if(p[j]!="nill"&&p[l]!="nill"){
+if(p[j].x==p[l].x&&p[j].y==p.[l].y&&j!=l){
+		
+	if(lockblack==true){
+Array.p.splice(j,1,"nill");
+
+	}	
+	if(lockwhite==true){
+Array.p.splice(l,1,"nill");
+
+	}	
+	
+}
+}
+	
+	
+}	
+}	
+
+	
+	
 }
 }
 

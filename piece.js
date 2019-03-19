@@ -15,9 +15,9 @@ for(let j=1;j<10;j++){
 	this.canattack[j]=[];
 	
 }
-for(let j=1;j<10;j++){
-for(let k=1;k<10;k++){
-this.canattack[k][j]=true;
+for(let j=1;j<9;j++){
+for(let k=1;k<9;k++){
+this.canattack[k][j]=false;
 	
 }
 }
@@ -126,7 +126,7 @@ this.canattack[k][j]=true;
 
 	ckgreen(x,y){
 		if(x>0&&y>0&&x<10&&x<10){
-			if(xy[x][y]=="empty"||this.canatttack[x][y]==true){
+			if(xy[x][y]=="empty"||this.canattack[x][y]==true){
 				fill(0,260,0);
 			rect(x*60,y*60,60,60);
 			this.gx[x]="green"
@@ -191,7 +191,7 @@ this.canattack[k][j]=true;
 					
 				}
 				else{
-					if(this.canatttack[this.x+j][this.y-j]==true){
+					if(this.canattack[this.x+j][this.y+j]==true){
 					p.ckgreen(this.x+j,this.y+j);	
 					}
 				j=10;
@@ -205,7 +205,7 @@ this.canattack[k][j]=true;
 					
 				}
 				else{
-					if(this.canatttack[this.x+j][this.y-j]==true){
+					if(this.canattack[this.x-j][this.y+j]==true){
 					p.ckgreen(this.x-j,this.y+j);	
 					}
 				j=10;
@@ -219,7 +219,7 @@ this.canattack[k][j]=true;
 					
 				}
 				else{
-					if(this.canatttack[this.x-j][this.y-j]==true){
+					if(this.canattack[this.x-j][this.y-j]==true){
 					p.ckgreen(this.x-j,this.y-j);	
 					}
 				j=10;
@@ -233,7 +233,7 @@ this.canattack[k][j]=true;
 					
 				}
 				else{
-					if(this.canatttack[this.x+j][this.y-j]==true){
+					if(this.canattack[this.x+j][this.y-j]==true){
 					p.ckgreen(this.x+j,this.y-j);	
 					}
 					
@@ -250,7 +250,7 @@ this.canattack[k][j]=true;
 					
 				}
 				else{
-				if(this.canatttack[this.x][this.y+j]=true){
+				if(this.canattack[this.x][this.y+j]==true){
 					p.ckgreen(this.x,this.y+j);	
 					}
 				j=10;
@@ -265,7 +265,7 @@ this.canattack[k][j]=true;
 					
 				}
 				else{
-					if(this.canatttack[this.x][this.y-j]=true){
+					if(this.canattack[this.x][this.y-j]==true){
 					p.ckgreen(this.x,this.y-j);	
 					}
 				j=10;
@@ -279,7 +279,7 @@ this.canattack[k][j]=true;
 					
 				}
 				else{
-					if(this.canatttack[this.x+j][this.y]=true){
+					if(this.canattack[this.x+j][this.y]==true){
 					p.ckgreen(this.x+j,this.y);	
 					}
 				j=10;
@@ -293,7 +293,7 @@ this.canattack[k][j]=true;
 					
 				}
 				else{
-					if(this.canatttack[this.x-j][this.y]=true){
+					if(this.canattack[this.x-j][this.y]==true){
 					p.ckgreen(this.x-j,this.y);	
 					}
 				j=10;
@@ -364,7 +364,7 @@ this.canattack[k][j]=true;
 					
 				}
 				else{
-					if(this.canatttack[this.x+j][this.y-j]==true){
+					if(this.canattack[this.x+j][this.y-j]==true){
 					p.ckgreen(this.x+j,this.y+j);	
 					}
 				j=10;
@@ -378,7 +378,7 @@ this.canattack[k][j]=true;
 					
 				}
 				else{
-					if(this.canatttack[this.x+j][this.y-j]==true){
+					if(this.canattack[this.x+j][this.y-j]==true){
 					p.ckgreen(this.x-j,this.y+j);	
 					}
 				j=10;
@@ -392,7 +392,7 @@ this.canattack[k][j]=true;
 					
 				}
 				else{
-					if(this.canatttack[this.x-j][this.y-j]==true){
+					if(this.canattack[this.x-j][this.y-j]==true){
 					p.ckgreen(this.x-j,this.y-j);	
 					}
 				j=10;
@@ -406,7 +406,7 @@ this.canattack[k][j]=true;
 					
 				}
 				else{
-					if(this.canatttack[this.x+j][this.y-j]==true){
+					if(this.canattack[this.x+j][this.y-j]==true){
 					p.ckgreen(this.x+j,this.y-j);	
 					}
 					
@@ -443,7 +443,7 @@ this.canattack[k][j]=true;
 					
 				}
 				else{
-				if(this.canatttack[this.x][this.y+j]=true){
+				if(this.canattack[this.x][this.y+j]=true){
 					p.ckgreen(this.x,this.y+j);	
 					}
 				j=10;
@@ -458,7 +458,7 @@ this.canattack[k][j]=true;
 					
 				}
 				else{
-					if(this.canatttack[this.x][this.y-j]=true){
+					if(this.canattack[this.x][this.y-j]=true){
 					p.ckgreen(this.x,this.y-j);	
 					}
 				j=10;
@@ -472,7 +472,7 @@ this.canattack[k][j]=true;
 					
 				}
 				else{
-					if(this.canatttack[this.x+j][this.y]=true){
+					if(this.canattack[this.x+j][this.y]=true){
 					p.ckgreen(this.x+j,this.y);	
 					}
 				j=10;
@@ -486,7 +486,7 @@ this.canattack[k][j]=true;
 					
 				}
 				else{
-					if(this.canatttack[this.x-j][this.y]=true){
+					if(this.canattack[this.x-j][this.y]=true){
 					p.ckgreen(this.x-j,this.y);	
 					}
 				j=10;
@@ -522,7 +522,9 @@ this.canattack[k][j]=true;
 			if(this.canattack[this.x-1][this.y-1]==true){
 			p.ckgreen(this.x-1,this.y-1);	
 			}
-			
+			if(this.canattack[this.x-1][this.y-1]==true){
+			p.ckgreen(this.x+1,this.y-1);	
+			}
 			
 			p.ckgreen(this.x,this.y-1);
 			if(this.moooved==0&&xy[this.x][this.y-1]!="filled"){
@@ -532,6 +534,9 @@ this.canattack[k][j]=true;
 			else {
 				if(this.canattack[this.x+1][this.y+1]==true){
 			p.ckgreen(this.x+1,this.y+1);	
+			}
+			if(this.canattack[this.x+1][this.y+1]==true){
+			p.ckgreen(this.x-1,this.y+1);	
 			}
 				
 				p.ckgreen(this.x,this.y+1);
