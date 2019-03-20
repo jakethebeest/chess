@@ -139,7 +139,9 @@ if(p[j+8]!="nill"){
 	}
 //===============================================================================================
  for(let j=1;j<33;j++){
+	  if(p[j]!="nill"){
 	 p[j].move(p[j])
+	  }
  }
  if(p[1]!="nill"){
 p[1].rook(p[1]);
@@ -196,14 +198,16 @@ murder(){
 for(let j=1;j<17;j++){
 for(let l=17;l<33;l++){
 if(p[j]!="nill"&&p[l]!="nill"){
-if(p[j].x==p[l].x&&p[j].y==p.[l].y&&j!=l){
+if(p[j].x==p[l].x&&p[j].y==p[l].y&&j!=l){
 		
 	if(lockblack==true){
-Array.p.splice(j,1,"nill");
+p[j].died=true;
+
+
 
 	}	
 	if(lockwhite==true){
-Array.p.splice(l,1,"nill");
+p[j].died=true;
 
 	}	
 	

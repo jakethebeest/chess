@@ -27,6 +27,7 @@ function draw(){
 	background(255);
 b.bord_setup();
 b.piece_setup();
+b.murder();
 fill(200,0,0);
 text(lockwhite,550,100);
 text(lockblack,550,150);
