@@ -10,16 +10,32 @@ this.gy=[];
 this.k=0;
 this.gx=[];
 this.moooved=0;
+
+
+for(let j=1;j<9;j++){
+for(let k=1;k<9;k++){
+canattack[k][j]=true;
+	
+}
+}
+this.died=false;
 }	
 	
 	king(p){
+		
 		if(this.h==0){
+			if(this.type=="white"){
 			this.img=createImg("king.png");
+			}
+			if(this.type=="black"){
+			this.img=createImg("(black) king.png");
+			}
 		this.img.class('picbdd');
 		this.h=1;
 	}
-
+if(this.died==false){
 		if(p.ckrange(this.x,this.y)||this.pressed==1){
+			if(this.type=="black"&&lockblack==false){
 			p.ckgreen(this.x+1,this.y);
 			p.ckgreen(this.x-1,this.y);
 			p.ckgreen(this.x+1,this.y+1);
@@ -28,8 +44,19 @@ this.moooved=0;
 			p.ckgreen(this.x+1,this.y-1);
 			p.ckgreen(this.x,this.y-1);
 			p.ckgreen(this.x-1,this.y-1);
-		    
 			this.pressed=1;
+			}
+			if(this.type=="white"&&lockwhite==false){
+			p.ckgreen(this.x+1,this.y);
+			p.ckgreen(this.x-1,this.y);
+			p.ckgreen(this.x+1,this.y+1);
+			p.ckgreen(this.x,this.y+1);
+			p.ckgreen(this.x-1,this.y+1);
+			p.ckgreen(this.x+1,this.y-1);
+			p.ckgreen(this.x,this.y-1);
+			p.ckgreen(this.x-1,this.y-1);
+			this.pressed=1;
+			}
 			
 		}
 		else{
@@ -39,12 +66,19 @@ this.moooved=0;
 		}
 	this.img.position(this.x*60+120,this.y*60+120);
 		xy[this.x][this.y]="king";
+}
+else{
+	this.x=-100;
+	this.y=-100;
+	this.img.position(this.x*60+120,this.y*60+120);
+}
 		//stroke(0,200,0);
 
 	}
 	
 	
 	move(p){
+		if(this.type=="white"){
      for (let j=1;j<9;j++){
 		for (let l=1;l<9;l++){
 		if(this.gx[j]=="green"&&this.gy[l]=="green" && ((j!=this.x)||(l!=this.y)) &&xy[j][l]=="green"   ){
@@ -53,8 +87,9 @@ this.moooved=0;
 			rect(j*60,l*60,60,60);
 			if(p.ckrange(j,l)){
 			xy[this.x][this.y]="empty";
-			this.mooved=1;
-			
+			this.moooved=1;
+		    lockwhite=true;
+			lockblack=false;
 			this.x=j;
 			this.y=l;
 			this.pressed=0;
@@ -66,19 +101,44 @@ this.moooved=0;
 
 	 }
 	 }
-	 
+		}
+		if(this.type=="black"){
+     for (let j=1;j<9;j++){
+		for (let l=1;l<9;l++){
+		if(this.gx[j]=="green"&&this.gy[l]=="green" && ((j!=this.x)||(l!=this.y)) &&(xy[j][l]=="green"||canattack[j][l]==true)   ){
+				fill(0,255,0);
+					
+			rect(j*60,l*60,60,60);
+			if(p.ckrange(j,l)){
+			xy[this.x][this.y]="empty";
+			this.moooved=1;
+		    lockwhite=false;
+			lockblack=true;
+			this.x=j;
+			this.y=l;
+			this.pressed=0;
+			p.remove_green()
+	 	  this.k++;
+		  
+			}
+		}
+
+	 }
+	 }
+		}
 }
 
 
 	ckgreen(x,y){
-			if(xy[x][y]=="empty"){
+		if(x>0&&y>0&&x<10&&x<10){
+			if(xy[x][y]=="empty"||canattack[x][y]==true){
 				fill(0,260,0);
 			rect(x*60,y*60,60,60);
 			this.gx[x]="green"
 			this.gy[y]="green"
 			xy[x][y]="green"
 			}
-			
+		}
 		
 		
 	}
@@ -115,13 +175,18 @@ this.moooved=0;
 	
 	queen(p){
 		if(this.h==0){
+			if(this.type=="white"){
 			this.img=createImg("queen.png");
+			}
+			if(this.type=="black"){
+			this.img=createImg("(black) queen.png");
+			}
 		this.img.class('picbdd');
 		this.h=1;
 	}
 
 		if(p.ckrange(this.x,this.y)||this.pressed==1){
-			
+			if((this.type=="white"&&lockwhite==false)||(this.type=="black"&&lockblack==false)){
 			// move down right
 			for(let j=1;j<8;j++){
 				if(this.x+j<9){
@@ -131,6 +196,9 @@ this.moooved=0;
 					
 				}
 				else{
+					if(canattack[this.x+j][this.y+j]==true){
+					p.ckgreen(this.x+j,this.y+j);	
+					}
 				j=10;
 				}}}}
 				//move down left
@@ -142,6 +210,9 @@ this.moooved=0;
 					
 				}
 				else{
+					if(canattack[this.x-j][this.y+j]==true){
+					p.ckgreen(this.x-j,this.y+j);	
+					}
 				j=10;
 				}}}}
 				//move up left
@@ -153,6 +224,9 @@ this.moooved=0;
 					
 				}
 				else{
+					if(canattack[this.x-j][this.y-j]==true){
+					p.ckgreen(this.x-j,this.y-j);	
+					}
 				j=10;
 				}}}}
 				//move up right
@@ -164,9 +238,15 @@ this.moooved=0;
 					
 				}
 				else{
+					if(canattack[this.x+j][this.y-j]==true){
+					p.ckgreen(this.x+j,this.y-j);	
+					}
+					
 				j=10;
 				}}}}
-				//move up
+				
+				
+				
 				for(let j=1;j<8;j++){
 				
 				if(this.y+j<9){
@@ -175,7 +255,11 @@ this.moooved=0;
 					
 				}
 				else{
+				if(canattack[this.x][this.y+j]==true){
+					p.ckgreen(this.x,this.y+j);	
+					}
 				j=10;
+				
 				}}}
 				//move down
 				for(let j=1;j<8;j++){
@@ -186,6 +270,9 @@ this.moooved=0;
 					
 				}
 				else{
+					if(canattack[this.x][this.y-j]==true){
+					p.ckgreen(this.x,this.y-j);	
+					}
 				j=10;
 				}}}
 				//move right
@@ -197,6 +284,9 @@ this.moooved=0;
 					
 				}
 				else{
+					if(canattack[this.x+j][this.y]==true){
+					p.ckgreen(this.x+j,this.y);	
+					}
 				j=10;
 				}}}
 				//move left
@@ -208,28 +298,75 @@ this.moooved=0;
 					
 				}
 				else{
+					if(canattack[this.x-j][this.y]==true){
+					p.ckgreen(this.x-j,this.y);	
+					}
 				j=10;
 				}}}
-			this.pressed=1;	
+			}		
+		this.pressed=1;	
+		
 		}
-	
 		this.img.position(this.x*60+120,this.y*60+120);
-		xy[this.x][this.y]="filled";
+		if(canattack[this.x][this.y]) xy[this.x][this.y]="green"; else {xy[this.x][this.y]="filled";}
 	
 	}
 	
 	
 	
-	knight(x,y){}
-	bish(p){
-		if(this.h==0){
-			this.img=createImg("bish.png");
+	knight(p){
+if(this.died==false){
+	if(this.h==0){
+			if(this.type=="white"){
+			this.img=createImg("knight.png");
+			}
+			if(this.type=="black"){
+			this.img=createImg("(black) knight.png");
+			}
 		this.img.class('picbdd');
 		this.h=1;
 	}
-
 		if(p.ckrange(this.x,this.y)||this.pressed==1){
+		if((this.type=="white"&&lockwhite==false)||(this.type=="black"&&lockblack==false)){
+
+			if(p.ckrange(this.x,this.y)||this.pressed==1){
+			p.ckgreen(this.x-2,this.y+1);
+			p.ckgreen(this.x-2,this.y-1);
+			p.ckgreen(this.x+2,this.y+1);
+			p.ckgreen(this.x+2,this.y-1);
 			
+			p.ckgreen(this.x+1,this.y-2);
+			p.ckgreen(this.x-1,this.y-2);
+			p.ckgreen(this.x+1,this.y+2);
+			p.ckgreen(this.x-1,this.y+2);
+			}	
+			}
+		}
+		this.img.position(this.x*60+120,this.y*60+120);
+		if(canattack[this.x][this.y]) xy[this.x][this.y]="green"; else {xy[this.x][this.y]="filled";}
+}
+else{
+	this.x=-100;
+	this.y=-100;
+	this.img.position(this.x*60+120,this.y*60+120);
+}
+	}
+	bish(p){
+		
+		if(this.h==0){
+			if(this.type=="white"){
+			this.img=createImg("bish.png");
+			}
+			if(this.type=="black"){
+			this.img=createImg("(black) bish.png");
+			}
+		this.img.class('picbdd');
+		this.h=1;
+	}
+if(this.died==false){
+		if(p.ckrange(this.x,this.y)||this.pressed==1){
+					if((this.type=="white"&&lockwhite==false)||(this.type=="black"&&lockblack==false)){
+	
 			// move down right
 			for(let j=1;j<8;j++){
 				if(this.x+j<9){
@@ -239,6 +376,9 @@ this.moooved=0;
 					
 				}
 				else{
+					if(canattack[this.x+j][this.y-j]==true){
+					p.ckgreen(this.x+j,this.y+j);	
+					}
 				j=10;
 				}}}}
 				//move down left
@@ -250,6 +390,9 @@ this.moooved=0;
 					
 				}
 				else{
+					if(canattack[this.x+j][this.y-j]==true){
+					p.ckgreen(this.x-j,this.y+j);	
+					}
 				j=10;
 				}}}}
 				//move up left
@@ -261,6 +404,9 @@ this.moooved=0;
 					
 				}
 				else{
+					if(canattack[this.x-j][this.y-j]==true){
+					p.ckgreen(this.x-j,this.y-j);	
+					}
 				j=10;
 				}}}}
 				//move up right
@@ -272,24 +418,42 @@ this.moooved=0;
 					
 				}
 				else{
+					if(canattack[this.x+j][this.y-j]==true){
+					p.ckgreen(this.x+j,this.y-j);	
+					}
+					
 				j=10;
 				}}}}
 		this.pressed=1;	
+					}
 		}
-	
+	else {}
+
 		this.img.position(this.x*60+120,this.y*60+120);
-		xy[this.x][this.y]="filled";
+		if(canattack[this.x][this.y]) xy[this.x][this.y]="green"; else {xy[this.x][this.y]="filled";}
+}
+		else{
+	this.x=-100;
+	this.y=-100;
+	this.img.position(this.x*60+120,this.y*60+120);
+}
 		
 	}
 	rook(p){
 		if(this.h==0){
+			if(this.type=="white"){
 			this.img=createImg("rook.png");
+			}
+			if(this.type=="black"){
+			this.img=createImg("(black) rook.png");
+			}
 		this.img.class('picbdd');
 		this.h=1;
 	}
-
+if(this.died==false){
 		if(p.ckrange(this.x,this.y)||this.pressed==1){
-			
+			if((this.type=="white"&&lockwhite==false)||(this.type=="black"&&lockblack==false)){
+
 			for(let j=1;j<8;j++){
 				
 				if(this.y+j<9){
@@ -298,7 +462,11 @@ this.moooved=0;
 					
 				}
 				else{
+				if(canattack[this.x][this.y+j]=true){
+					p.ckgreen(this.x,this.y+j);	
+					}
 				j=10;
+				
 				}}}
 				//move down
 				for(let j=1;j<8;j++){
@@ -309,6 +477,9 @@ this.moooved=0;
 					
 				}
 				else{
+					if(canattack[this.x][this.y-j]=true){
+					p.ckgreen(this.x,this.y-j);	
+					}
 				j=10;
 				}}}
 				//move right
@@ -320,6 +491,9 @@ this.moooved=0;
 					
 				}
 				else{
+					if(canattack[this.x+j][this.y]=true){
+					p.ckgreen(this.x+j,this.y);	
+					}
 				j=10;
 				}}}
 				//move left
@@ -331,33 +505,85 @@ this.moooved=0;
 					
 				}
 				else{
+					if(canattack[this.x-j][this.y]=true){
+					p.ckgreen(this.x-j,this.y);	
+					}
 				j=10;
 				}}}
-		this.pressed=1;	
-		}
+
+				this.pressed=1;	
+			}
+				}
 	
 		this.img.position(this.x*60+120,this.y*60+120);
-		xy[this.x][this.y]="filled";
-	
+		if(canattack[this.x][this.y]) xy[this.x][this.y]="green"; else {xy[this.x][this.y]="filled";}
+}
+		else{
+	this.x=-100;
+	this.y=-100;
+	this.img.position(this.x*60+120,this.y*60+120);
+}	
 	}
 	pong(p){
-		if(this.h==0){
+	if(this.h==0){
+			if (this.type=="white"){
 			this.img=createImg("pong.png");
 		this.img.class('picbdd');
 		this.h=1;
-		
+			}
+			else {
+					this.img=createImg("(black) pong.png");
+		this.img.class('picbdd');
+		this.h=1;
+				
+				
+			}
 	}
-		if(p.ckrange(this.x,this.y)||this.pressed==1){
-			p.ckgreen(this.x,this.y-1);
-			if(this.moooved==0){
-				p.ckgreen(this.x,this.y-2);
+if(this.died==false){
+	if(p.ckrange(this.x,this.y)||this.pressed==1){
+		if((this.type=="white"&&lockwhite==false)||(this.type=="black"&&lockblack==false)){
+
+			if(this.type=="white"){
+			if(this.x-1>0&&canattack[this.x-1][this.y-1]==true){
+			p.ckgreen(this.x-1,this.y-1);	
+			}
+			if(this.x-1>0&&canattack[this.x-1][this.y-1]==true){
+			p.ckgreen(this.x+1,this.y-1);	
 			}
 			
-			
+			p.ckgreen(this.x,this.y-1);
+			////////////////////////////////////////////////////
+			if(this.moooved==0&&xy[this.x][this.y-1]!="filled"){
+				p.ckgreen(this.x,this.y-2);
+			}
+			////////////////////////////////////////////////////
+			}
+			else {
+				if(canattack[this.x+1][this.y+1]==true){
+			p.ckgreen(this.x+1,this.y+1);	
+			}
+			if(canattack[this.x+1][this.y+1]==true){
+			p.ckgreen(this.x-1,this.y+1);	
+			}
+				
+				p.ckgreen(this.x,this.y+1);
+				//////////////////////////////////////////////
+			if(this.moooved==0&&xy[this.x][this.y+1]!="filled"){
+				p.ckgreen(this.x,this.y+2);
+			}
+			///////////////////////////////////////////////////////
+			}
+		}
 		}
 		this.img.position(this.x*60+120,this.y*60+120);
-		xy[this.x][this.y]="filled";
-		
+		if(canattack[this.x][this.y]) xy[this.x][this.y]="green"; else {xy[this.x][this.y]="filled";}
+}
+else{
+	this.x=-100;
+	this.y=-100;
+	this.img.position(this.x*60+120,this.y*60+120);
+	p.remove_green();
+}		
 	}
 	display(){
 		

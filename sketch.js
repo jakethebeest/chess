@@ -1,7 +1,14 @@
 let b;let img;
-let can;let p,p2,p3,p4,p5,p6;
-let xy=[]
+let can;
+let xy=[];
+let lockwhite=false;
+let lockblack=true;
+let canattack=[];
 function setup(){
+	for(let j=1;j<10;j++){
+	canattack[j]=[];
+	
+}
 	can=createCanvas(600,600);
 	can.position(100,100);can.class("bdd");
 	for (let j=0;j<10;j++){
@@ -14,11 +21,9 @@ function setup(){
 		}
 	  }
 	b=new bord();
-	p=new piece(2,2,"king");
-	p2=new piece(3,3,"king");
-	p3=new piece(4,6,"bish");
-	p4=new piece(2,8,"bish");
-	p5=new piece(2,7,"bish");
+	//b.piece_setup();
+	//p=new piece(2,2,"black");
+
 		//image(Iking,27.7,27.7);
 
 
@@ -26,18 +31,11 @@ function setup(){
 function draw(){
 	background(255);
 b.bord_setup();
-p.king(p);	
-//p.display();
-p.move(p);
-p2.move(p2);
-p2.queen(p2);
-
-p3.bish(p3);
-p3.move(p3);
-p4.rook(p4);
-p4.move(p4);
-p5.pong(p5);
-p5.move(p5);
+b.piece_setup();
+b.murder();
+fill(200,0,0);
+text(lockwhite,550,100);
+text(lockblack,550,150);
 	}
 	function mousePressed(){
 	
