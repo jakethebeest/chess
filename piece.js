@@ -10,14 +10,11 @@ this.gy=[];
 this.k=0;
 this.gx=[];
 this.moooved=0;
-this.canattack=[];
-for(let j=1;j<10;j++){
-	this.canattack[j]=[];
-	
-}
+
+
 for(let j=1;j<9;j++){
 for(let k=1;k<9;k++){
-this.canattack[k][j]=true;
+canattack[k][j]=true;
 	
 }
 }
@@ -108,7 +105,7 @@ else{
 		if(this.type=="black"){
      for (let j=1;j<9;j++){
 		for (let l=1;l<9;l++){
-		if(this.gx[j]=="green"&&this.gy[l]=="green" && ((j!=this.x)||(l!=this.y)) &&xy[j][l]=="green"   ){
+		if(this.gx[j]=="green"&&this.gy[l]=="green" && ((j!=this.x)||(l!=this.y)) &&(xy[j][l]=="green"||canattack[j][l]==true)   ){
 				fill(0,255,0);
 					
 			rect(j*60,l*60,60,60);
@@ -134,7 +131,7 @@ else{
 
 	ckgreen(x,y){
 		if(x>0&&y>0&&x<10&&x<10){
-			if(xy[x][y]=="empty"||this.canattack[x][y]==true){
+			if(xy[x][y]=="empty"||canattack[x][y]==true){
 				fill(0,260,0);
 			rect(x*60,y*60,60,60);
 			this.gx[x]="green"
@@ -199,7 +196,7 @@ else{
 					
 				}
 				else{
-					if(this.canattack[this.x+j][this.y+j]==true){
+					if(canattack[this.x+j][this.y+j]==true){
 					p.ckgreen(this.x+j,this.y+j);	
 					}
 				j=10;
@@ -213,7 +210,7 @@ else{
 					
 				}
 				else{
-					if(this.canattack[this.x-j][this.y+j]==true){
+					if(canattack[this.x-j][this.y+j]==true){
 					p.ckgreen(this.x-j,this.y+j);	
 					}
 				j=10;
@@ -227,7 +224,7 @@ else{
 					
 				}
 				else{
-					if(this.canattack[this.x-j][this.y-j]==true){
+					if(canattack[this.x-j][this.y-j]==true){
 					p.ckgreen(this.x-j,this.y-j);	
 					}
 				j=10;
@@ -241,7 +238,7 @@ else{
 					
 				}
 				else{
-					if(this.canattack[this.x+j][this.y-j]==true){
+					if(canattack[this.x+j][this.y-j]==true){
 					p.ckgreen(this.x+j,this.y-j);	
 					}
 					
@@ -258,7 +255,7 @@ else{
 					
 				}
 				else{
-				if(this.canattack[this.x][this.y+j]==true){
+				if(canattack[this.x][this.y+j]==true){
 					p.ckgreen(this.x,this.y+j);	
 					}
 				j=10;
@@ -273,7 +270,7 @@ else{
 					
 				}
 				else{
-					if(this.canattack[this.x][this.y-j]==true){
+					if(canattack[this.x][this.y-j]==true){
 					p.ckgreen(this.x,this.y-j);	
 					}
 				j=10;
@@ -287,7 +284,7 @@ else{
 					
 				}
 				else{
-					if(this.canattack[this.x+j][this.y]==true){
+					if(canattack[this.x+j][this.y]==true){
 					p.ckgreen(this.x+j,this.y);	
 					}
 				j=10;
@@ -301,7 +298,7 @@ else{
 					
 				}
 				else{
-					if(this.canattack[this.x-j][this.y]==true){
+					if(canattack[this.x-j][this.y]==true){
 					p.ckgreen(this.x-j,this.y);	
 					}
 				j=10;
@@ -311,7 +308,7 @@ else{
 		
 		}
 		this.img.position(this.x*60+120,this.y*60+120);
-		xy[this.x][this.y]="filled";
+		if(canattack[this.x][this.y]) xy[this.x][this.y]="green"; else {xy[this.x][this.y]="filled";}
 	
 	}
 	
@@ -346,7 +343,7 @@ if(this.died==false){
 			}
 		}
 		this.img.position(this.x*60+120,this.y*60+120);
-		xy[this.x][this.y]="filled";
+		if(canattack[this.x][this.y]) xy[this.x][this.y]="green"; else {xy[this.x][this.y]="filled";}
 }
 else{
 	this.x=-100;
@@ -379,7 +376,7 @@ if(this.died==false){
 					
 				}
 				else{
-					if(this.canattack[this.x+j][this.y-j]==true){
+					if(canattack[this.x+j][this.y-j]==true){
 					p.ckgreen(this.x+j,this.y+j);	
 					}
 				j=10;
@@ -393,7 +390,7 @@ if(this.died==false){
 					
 				}
 				else{
-					if(this.canattack[this.x+j][this.y-j]==true){
+					if(canattack[this.x+j][this.y-j]==true){
 					p.ckgreen(this.x-j,this.y+j);	
 					}
 				j=10;
@@ -407,7 +404,7 @@ if(this.died==false){
 					
 				}
 				else{
-					if(this.canattack[this.x-j][this.y-j]==true){
+					if(canattack[this.x-j][this.y-j]==true){
 					p.ckgreen(this.x-j,this.y-j);	
 					}
 				j=10;
@@ -421,7 +418,7 @@ if(this.died==false){
 					
 				}
 				else{
-					if(this.canattack[this.x+j][this.y-j]==true){
+					if(canattack[this.x+j][this.y-j]==true){
 					p.ckgreen(this.x+j,this.y-j);	
 					}
 					
@@ -433,7 +430,7 @@ if(this.died==false){
 	else {}
 
 		this.img.position(this.x*60+120,this.y*60+120);
-		xy[this.x][this.y]="filled";
+		if(canattack[this.x][this.y]) xy[this.x][this.y]="green"; else {xy[this.x][this.y]="filled";}
 }
 		else{
 	this.x=-100;
@@ -465,7 +462,7 @@ if(this.died==false){
 					
 				}
 				else{
-				if(this.canattack[this.x][this.y+j]=true){
+				if(canattack[this.x][this.y+j]=true){
 					p.ckgreen(this.x,this.y+j);	
 					}
 				j=10;
@@ -480,7 +477,7 @@ if(this.died==false){
 					
 				}
 				else{
-					if(this.canattack[this.x][this.y-j]=true){
+					if(canattack[this.x][this.y-j]=true){
 					p.ckgreen(this.x,this.y-j);	
 					}
 				j=10;
@@ -494,7 +491,7 @@ if(this.died==false){
 					
 				}
 				else{
-					if(this.canattack[this.x+j][this.y]=true){
+					if(canattack[this.x+j][this.y]=true){
 					p.ckgreen(this.x+j,this.y);	
 					}
 				j=10;
@@ -508,7 +505,7 @@ if(this.died==false){
 					
 				}
 				else{
-					if(this.canattack[this.x-j][this.y]=true){
+					if(canattack[this.x-j][this.y]=true){
 					p.ckgreen(this.x-j,this.y);	
 					}
 				j=10;
@@ -519,7 +516,7 @@ if(this.died==false){
 				}
 	
 		this.img.position(this.x*60+120,this.y*60+120);
-		xy[this.x][this.y]="filled";
+		if(canattack[this.x][this.y]) xy[this.x][this.y]="green"; else {xy[this.x][this.y]="filled";}
 }
 		else{
 	this.x=-100;
@@ -547,40 +544,45 @@ if(this.died==false){
 		if((this.type=="white"&&lockwhite==false)||(this.type=="black"&&lockblack==false)){
 
 			if(this.type=="white"){
-			if(this.canattack[this.x-1][this.y-1]==true){
+			if(this.x-1>0&&canattack[this.x-1][this.y-1]==true){
 			p.ckgreen(this.x-1,this.y-1);	
 			}
-			if(this.canattack[this.x-1][this.y-1]==true){
+			if(this.x-1>0&&canattack[this.x-1][this.y-1]==true){
 			p.ckgreen(this.x+1,this.y-1);	
 			}
 			
 			p.ckgreen(this.x,this.y-1);
+			////////////////////////////////////////////////////
 			if(this.moooved==0&&xy[this.x][this.y-1]!="filled"){
 				p.ckgreen(this.x,this.y-2);
 			}
+			////////////////////////////////////////////////////
 			}
 			else {
-				if(this.canattack[this.x+1][this.y+1]==true){
+				if(canattack[this.x+1][this.y+1]==true){
 			p.ckgreen(this.x+1,this.y+1);	
 			}
-			if(this.canattack[this.x+1][this.y+1]==true){
+			if(canattack[this.x+1][this.y+1]==true){
 			p.ckgreen(this.x-1,this.y+1);	
 			}
 				
 				p.ckgreen(this.x,this.y+1);
+				//////////////////////////////////////////////
 			if(this.moooved==0&&xy[this.x][this.y+1]!="filled"){
 				p.ckgreen(this.x,this.y+2);
 			}
+			///////////////////////////////////////////////////////
 			}
 		}
 		}
 		this.img.position(this.x*60+120,this.y*60+120);
-		xy[this.x][this.y]="filled";
+		if(canattack[this.x][this.y]) xy[this.x][this.y]="green"; else {xy[this.x][this.y]="filled";}
 }
 else{
 	this.x=-100;
 	this.y=-100;
 	this.img.position(this.x*60+120,this.y*60+120);
+	p.remove_green();
 }		
 	}
 	display(){

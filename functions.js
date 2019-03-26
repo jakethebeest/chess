@@ -201,7 +201,7 @@ if(p[j]!="nill"&&p[l]!="nill"){
 if(p[j].x==p[l].x&&p[j].y==p[l].y&&j!=l){
 		
 	if(lockblack==true){
-p[j].died=true;
+p[l].died=true;
 
 
 

@@ -3,7 +3,12 @@ let can;
 let xy=[];
 let lockwhite=false;
 let lockblack=true;
+let canattack=[];
 function setup(){
+	for(let j=1;j<10;j++){
+	canattack[j]=[];
+	
+}
 	can=createCanvas(600,600);
 	can.position(100,100);can.class("bdd");
 	for (let j=0;j<10;j++){
