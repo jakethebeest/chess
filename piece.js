@@ -11,8 +11,15 @@ this.k=0;
 this.gx=[];
 this.moooved=0;
 this.l=true;
-
-
+this.canattack=[];
+for(let j=1;j<10;j++){
+	this.canattack[j]=[];
+}
+for(let j=1;j<10;j++){
+for(let l=1;l<10;l++){
+this.canattack[j][l]==false;	
+}
+}
 this.died=false;
 }	
 	
@@ -54,19 +61,18 @@ if(this.died==false){
 			}
 			
 		}
-		else{
-			
 
-			
-		}
-		if(this.type=="white")
-		canattack[this.x][this.y]="trueWhite";
-else{
-	canattack[this.x][this.y]="trueBlack";
-}
+		
+	
 	this.img.position(this.x*60+120,this.y*60+120);
-		xy[this.x][this.y]="king";
+	if(this.type=="white"){
+		xy[this.x][this.y]="white";
+	}
+	else{
+		xy[this.x][this.y]="black";
+	}
 }
+	
 else{
 	this.x=-100;
 	this.y=-100;
@@ -84,7 +90,7 @@ else{
 		if(this.type=="white"&&lockwhite==false){
      for (let j=1;j<9;j++){
 		for (let l=1;l<9;l++){
-		if(this.gx[j]=="green"&&this.gy[l]=="green" && ((j!=this.x)||(l!=this.y)) &&xy[j][l]=="green"   ){
+		if(this.gx[j]=="green"&&this.gy[l]=="green" && ((j!=this.x)||(l!=this.y)) &&xy[j][l]=="green"||this.canattack[j][l]==true   ){
 				fill(0,255,0);
 					
 			rect(j*60,l*60,60,60);
@@ -108,7 +114,7 @@ else{
 		if(this.type=="black"&&lockblack==false){
      for (let j=1;j<9;j++){
 		for (let l=1;l<9;l++){
-		if(this.gx[j]=="green"&&this.gy[l]=="green" && ((j!=this.x)||(l!=this.y)) &&(xy[j][l]=="green"||canattack[j][l]==true)   ){
+		if(this.gx[j]=="green"&&this.gy[l]=="green" && ((j!=this.x)||(l!=this.y)) &&(xy[j][l]=="green"||[j][l]==true)   ){
 				fill(0,255,0);
 					
 			rect(j*60,l*60,60,60);
@@ -134,7 +140,7 @@ else{
 
 	ckgreen(x,y){
 		if(x>0&&y>0&&x<10&&x<10){
-			if(xy[x][y]=="empty"||canattack[x][y]==true){
+			if(xy[x][y]=="empty"||[x][y]==true){
 				fill(0,260,0);
 			rect(x*60,y*60,60,60);
 			this.gx[x]="green";
@@ -189,7 +195,7 @@ else{
 	}
 
 		if(p.ckrange(this.x,this.y)||this.pressed==1){
-			if((this.type=="white"&&lockwhite==true)||(this.type=="black"&&lockblack==true)){
+			if((this.type=="white"&&lockwhite==false)||(this.type=="black"&&lockblack==false)){
 			// move down right
 			for(let j=1;j<8;j++){
 				if(this.x+j<9){
@@ -199,9 +205,7 @@ else{
 					
 				}
 				else{
-					if((canattack[this.x+j][this.y+j]=="trueWhite"&&lockwhite==true)||(canattack[this.x+j][this.y+j]=="trueBlack"&&lockblack==false)){
-					p.ckgreen(this.x+j,this.y+j);	
-					}
+					
 				j=10;
 				}}}}
 				//move down left
@@ -213,9 +217,7 @@ else{
 					
 				}
 				else{
-					if((canattack[this.x-j][this.y+j]=="trueWhite"&&lockwhite==true)||(canattack[this.x-j][this.y+j]=="trueBlack"&&lockblack==false)){
-					p.ckgreen(this.x-j,this.y+j);	
-					}
+					
 				j=10;
 				}}}}
 				//move up left
@@ -227,9 +229,7 @@ else{
 					
 				}
 				else{
-					if((canattack[this.x-j][this.y-j]=="trueWhite"&&lockwhite==true)||(canattack[this.x-j][this.x-j]=="trueBlack"&&lockblack==false)){
-					p.ckgreen(this.x-j,this.y-j);	
-					}
+					
 				j=10;
 				}}}}
 				//move up right
@@ -241,9 +241,7 @@ else{
 					
 				}
 				else{
-					if((canattack[this.x+j][this.y-j]=="trueWhite"&&lockwhite==true)||(canattack[this.x+j][this.y+j]=="trueBlack"&&lockblack==false)){
-					p.ckgreen(this.x+j,this.y-j);	
-					}
+					
 					
 				j=10;
 				}}}}
@@ -258,9 +256,7 @@ else{
 					
 				}
 				else{
-					if((canattack[this.x][this.y+j]=="trueWhite"&&lockwhite==true)||(canattack[this.x][this.y+j]=="trueBlack"&&lockblack==false)){
-					p.ckgreen(this.x,this.y+j);	
-					}
+					
 				j=10;
 				
 				}}}
@@ -273,9 +269,8 @@ else{
 					
 				}
 				else{
-					if((canattack[this.x][this.y-j]=="trueWhite"&&lockwhite==true)||(canattack[this.x][this.y-j]=="trueBlack"&&lockblack==false)){
-					p.ckgreen(this.x,this.y-j);	
-					}
+					
+					
 				j=10;
 				}}}
 				//move right
@@ -287,9 +282,7 @@ else{
 					
 				}
 				else{
-					if((canattack[this.x+j][this.y]=="trueWhite"&&lockwhite==true)||(canattack[this.x+j][this.y]=="trueBlack"&&lockblack==false)){
-					p.ckgreen(this.x+j,this.y);	
-					}
+					
 				j=10;
 				}}}
 				//move left
@@ -301,9 +294,7 @@ else{
 					
 				}
 				else{
-					if((canattack[this.x-j][this.y]=="trueWhite"&&lockwhite==true)||(canattack[this.x-j][this.y]=="trueBlack"&&lockblack==false)){
-					p.ckgreen(this.x-j,this.y);	
-					}
+					
 				j=10;
 				}}}
 			}		
@@ -311,7 +302,12 @@ else{
 		
 		}
 		this.img.position(this.x*60+120,this.y*60+120);
-		xy[this.x][this.y]="green";
+	if(this.type=="white"){
+				xy[this.x][this.y]="white";
+	}
+	else{
+				xy[this.x][this.y]="black";
+	}
 	
 	}
 	
@@ -330,7 +326,7 @@ if(this.died==false){
 		this.h=1;
 	}
 		if(p.ckrange(this.x,this.y)||this.pressed==1){
-		if((this.type=="white"&&lockwhite==true)||(this.type=="black"&&lockblack==true)){
+		if((this.type=="white"&&lockwhite==false)||(this.type=="black"&&lockblack==false)){
 
 			if(p.ckrange(this.x,this.y)||this.pressed==1){
 			p.ckgreen(this.x-2,this.y+1);
@@ -346,13 +342,15 @@ if(this.died==false){
 			}
 		}
 		this.img.position(this.x*60+120,this.y*60+120);
-	 xy[this.x][this.y]="green";
-	 	if(this.type=="white")
-		canattack[this.x][this.y]="trueWhite";
-else{
-	canattack[this.x][this.y]="trueBlack";
+	 if(this.type=="white"){
+		 		xy[this.x][this.y]="white";
+	 }
+	 	else{
+					xy[this.x][this.y]="black";
+		}
 }
-}
+
+
 else{
 	this.x=-100;
 	this.y=-100;
@@ -376,7 +374,7 @@ else{
 	}
 if(this.died==false){
 		if(p.ckrange(this.x,this.y)||this.pressed==1){
-					if((this.type=="white"&&lockwhite==true)||(this.type=="black"&&lockblack==true)){
+					if((this.type=="white"&&lockwhite==false)||(this.type=="black"&&lockblack==false)){
 	
 			// move down right
 			for(let j=1;j<8;j++){
@@ -387,7 +385,7 @@ if(this.died==false){
 					
 				}
 				else{
-					if((canattack[this.x+j][this.y+j]=="trueWhite"&&lockwhite==true)||(canattack[this.x+j][this.y+j]=="trueBlack"&&lockblack==false)){
+					if(([this.x+j][this.y+j]=="trueWhite"&&lockwhite==false)||([this.x+j][this.y+j]=="trueBlack"&&lockblack==false)){
 					p.ckgreen(this.x+j,this.y+j);	
 					}
 				j=10;
@@ -401,7 +399,7 @@ if(this.died==false){
 					
 				}
 				else{
-					if((canattack[this.x-j][this.y+j]=="trueWhite"&&lockwhite==true)||(canattack[this.x-j][this.y+j]=="trueBlack"&&lockblack==false)){
+					if(([this.x-j][this.y+j]=="trueWhite"&&lockwhite==false)||([this.x-j][this.y+j]=="trueBlack"&&lockblack==false)){
 					p.ckgreen(this.x-j,this.y+j);	
 					}
 				j=10;
@@ -415,9 +413,7 @@ if(this.died==false){
 					
 				}
 				else{
-					if((canattack[this.x-j][this.y-j]=="trueWhite"&&lockwhite==true)||(canattack[this.x-j][this.y-j]=="trueBlack"&&lockblack==false)){
-					p.ckgreen(this.x-j,this.y-j);	
-					}
+					
 				j=10;
 				}}}}
 				//move up right
@@ -429,9 +425,7 @@ if(this.died==false){
 					
 				}
 				else{
-					if((canattack[this.x+j][this.y-j]=="trueWhite"&&lockwhite==true)||(canattack[this.x+j][this.y-j]=="trueBlack"&&lockblack==false)){
-					p.ckgreen(this.x+j,this.y-j);	
-					}
+					
 					
 				j=10;
 				}}}}
@@ -441,14 +435,13 @@ if(this.died==false){
 	else {}
 
 		this.img.position(this.x*60+120,this.y*60+120);
-		if(canattack[this.x][this.y]) xy[this.x][this.y]="green"; else {xy[this.x][this.y]="filled";}
-
-		
-		if(this.type=="white")
-		canattack[this.x][this.y]="trueWhite";
-else{
-	canattack[this.x][this.y]="trueBlack";
+if(this.type=="white"){
+			xy[this.x][this.y]="white";
+	
 }
+		else{
+					xy[this.x][this.y]="black";
+		}
 }
 		else{
 	this.x=-100;
@@ -474,7 +467,7 @@ else{
 	}
 if(this.died==false){
 		if(p.ckrange(this.x,this.y)||this.pressed==1){
-			if((this.type=="white"&&lockwhite==true)||(this.type=="black"&&lockblack==true)){
+			if((this.type=="white"&&lockwhite==false)||(this.type=="black"&&lockblack==false)){
 
 			for(let j=1;j<8;j++){
 				
@@ -484,9 +477,7 @@ if(this.died==false){
 					
 				}
 				else{
-					if((canattack[this.x][this.y+j]=="trueWhite"&&lockwhite==true)||(canattack[this.x][this.y+j]=="trueBlack"&&lockblack==false)){
-					p.ckgreen(this.x,this.y+j);	
-					}
+					
 				j=10;
 				
 				}}}
@@ -499,7 +490,7 @@ if(this.died==false){
 					
 				}
 				else{
-					if((canattack[this.x][this.y-j]=="trueWhite"&&lockwhite==true)||(canattack[this.x][this.y-j]=="trueBlack"&&lockblack==false)){
+					
 					p.ckgreen(this.x,this.y-j);	
 					}
 				j=10;
@@ -513,9 +504,8 @@ if(this.died==false){
 					
 				}
 				else{
-					if((canattack[this.x+j][this.y]=="trueWhite"&&lockwhite==true)||(canattack[this.x+j][this.y]=="trueBlack"&&lockblack==false)){
-					p.ckgreen(this.x+j,this.y);	
-					}
+					
+					
 				j=10;
 				}}}
 				//move left
@@ -527,23 +517,22 @@ if(this.died==false){
 					
 				}
 				else{
-					if((canattack[this.x-j][this.y]=="trueWhite"&&lockwhite==true)||(canattack[this.x-j][this.y]=="trueBlack"&&lockblack==false)){
-					p.ckgreen(this.x-j,this.y);	
-					}
+					
+					
 				j=10;
 				}}}
 
 				this.pressed=1;	
 			}
-				}
+				
 	
 		this.img.position(this.x*60+120,this.y*60+120);
-			if(this.type=="white")
-		canattack[this.x][this.y]="trueWhite";
-else{
-	canattack[this.x][this.y]="trueBlack";
-}
+			if(this.type=="white"){
 		 xy[this.x][this.y]="green";
+			}
+			else{
+						xy[this.x][this.y]="black";
+			}
 }
 		else{
 	this.x=-100;
@@ -571,16 +560,15 @@ else{
 	}
 if(this.died==false){
 	if(p.ckrange(this.x,this.y)||this.pressed==1){
-		if((this.type=="white"&&lockwhite==true)||(this.type=="black"&&lockblack==true)){
+		if((this.type=="white"&&lockwhite==false)||(this.type=="black"&&lockblack==false)){
 
 			if(this.type=="white"){
-			if(this.x-1>0&&((canattack[this.x-1][this.y-1]=="trueWhite"&&lockwhite==true)||(canattack[this.x-1][this.y-1]=="trueBlack"&&lockblack==false))){
-			p.ckgreen(this.x-1,this.y-1);	
+			if(xy[this.x-1][this.y-1]=="black"){
+			this.canattack[this.x-1][this.y-1]=true;
 			}
-			if(this.x-1>0&&((canattack[this.x+1][this.y-1]=="trueWhite"&&lockwhite==true)||(canattack[this.x+1][this.y-1]=="trueBlack"&&lockblack==false))){
-			p.ckgreen(this.x+1,this.y-1);	
+			if(xy[this.x+1][this.y-1]=="black"){
+			this.canattack[this.x+1][this.y-1]=true;
 			}
-			
 			p.ckgreen(this.x,this.y-1);
 			////////////////////////////////////////////////////
 			if(this.moooved==0&&xy[this.x][this.y-1]!="filled"){
@@ -589,13 +577,13 @@ if(this.died==false){
 			////////////////////////////////////////////////////
 			}
 			else {
-			if((canattack[this.x+1][this.y+1]=="trueWhite"&&lockwhite==true)||(canattack[this.x+1][this.y+1]=="trueBlack"&&lockblack==false)){
-			p.ckgreen(this.x+1,this.y+1);	
+			
+			if(xy[this.x-1][this.y+1]=="white"){
+			this.canattack[this.x-1][this.y+1]=true;
 			}
-			if((canattack[this.x-1][this.y+1]=="trueWhite"&&lockwhite==true)||(canattack[this.x-1][this.y+1]=="trueBlack"&&lockblack==false)){
-			p.ckgreen(this.x-1,this.y+1);	
-			}
-				
+			if(xy[this.x+1][this.y+1]=="white"){
+			this.canattack[this.x+1][this.y+1]=true;
+			}	
 				p.ckgreen(this.x,this.y+1);
 				//////////////////////////////////////////////
 			if(this.moooved==0&&xy[this.x][this.y+1]!="filled"){
@@ -606,12 +594,14 @@ if(this.died==false){
 		}
 		}
 		this.img.position(this.x*60+120,this.y*60+120);
-	if(this.type=="white")
-		canattack[this.x][this.y]="trueWhite";
-else{
-	canattack[this.x][this.y]="trueBlack";
+	
+if(this.type=="white"){
+		xy[this.x][this.y]="white";
 }
-		xy[this.x][this.y]="green"; 
+else{
+		xy[this.x][this.y]="black";
+
+}	
 }
 else{
 	this.x=-100;

@@ -202,13 +202,13 @@ if(p[j].x==p[l].x&&p[j].y==p[l].y&&j!=l){
 		
 	if(lockblack==true){
 p[l].died=true;
-
+xy[p[l].x][p[l].y]=="empty";
 
 
 	}	
 	if(lockwhite==true){
 p[j].died=true;
-
+xy[p[j].x][p[j].y]=="empty";
 	}	
 	
 }
