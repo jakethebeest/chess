@@ -90,11 +90,12 @@ else{
 		if(this.type=="white"&&lockwhite==false){
      for (let j=1;j<9;j++){
 		for (let l=1;l<9;l++){
-		if(this.gx[j]=="green"&&this.gy[l]=="green" && ((j!=this.x)||(l!=this.y)) &&xy[j][l]=="green"||this.canattack[j][l]==true   ){
+		if(this.gx[j]=="green"&&this.gy[l]=="green" && ((j!=this.x)||(l!=this.y)) &&xy[j][l]=="green"||this.canattack[j][l]==true&&((j!=this.x)||(l!=this.y))   ){
 				fill(0,255,0);
 					
 			rect(j*60,l*60,60,60);
 			if(p.ckrange(j,l)){
+			this.canattack[j][l]=false;
 			xy[this.x][this.y]="empty";
 			this.moooved=1;
 		    lockwhite=true;
@@ -140,7 +141,7 @@ else{
 
 	ckgreen(x,y){
 		if(x>0&&y>0&&x<10&&x<10){
-			if(xy[x][y]=="empty"||[x][y]==true){
+			if(xy[x][y]=="empty"){
 				fill(0,260,0);
 			rect(x*60,y*60,60,60);
 			this.gx[x]="green";
@@ -155,9 +156,9 @@ else{
 			  for (let g=1;g<10;g++){
 		for (let e=1;e<10;e++){
 		
-			this.gx[g]="empty"
-			this.gy[e]="empty"
-			xy[g][e]="empty"
+			this.gx[g]="empty";
+			this.gy[e]="empty";
+			xy[g][e]="empty";
 		}
 	  }
 		
@@ -563,12 +564,9 @@ if(this.died==false){
 		if((this.type=="white"&&lockwhite==false)||(this.type=="black"&&lockblack==false)){
 
 			if(this.type=="white"){
-			if(xy[this.x-1][this.y-1]=="black"){
-			this.canattack[this.x-1][this.y-1]=true;
-			}
-			if(xy[this.x+1][this.y-1]=="black"){
-			this.canattack[this.x+1][this.y-1]=true;
-			}
+		p.attackrange(this.x-1,this.y-1);
+		p.attackrange(this.x+1,this.y-1);
+			
 			p.ckgreen(this.x,this.y-1);
 			////////////////////////////////////////////////////
 			if(this.moooved==0&&xy[this.x][this.y-1]!="filled"){
@@ -578,12 +576,8 @@ if(this.died==false){
 			}
 			else {
 			
-			if(xy[this.x-1][this.y+1]=="white"){
-			this.canattack[this.x-1][this.y+1]=true;
-			}
-			if(xy[this.x+1][this.y+1]=="white"){
-			this.canattack[this.x+1][this.y+1]=true;
-			}	
+		p.attackrange(this.x-1,this.y+1);
+		p.attackrange(this.x+1,this.y+1);
 				p.ckgreen(this.x,this.y+1);
 				//////////////////////////////////////////////
 			if(this.moooved==0&&xy[this.x][this.y+1]!="filled"){
@@ -613,6 +607,12 @@ else{
 	
 	
 }		
+	}
+	attackrange(x,y){
+		if((xy[x][y]=="black"&&this.type=="white")||(xy[x][y]=="white"&&this.type=="black")){
+		this.canattack[x][y]=true;
+		}
+
 	}
 	display(){
 		

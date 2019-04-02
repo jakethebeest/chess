@@ -192,6 +192,9 @@ p[31].knight(p[31]);
 if(p[32]!="nill"){
 p[32].rook(p[32]);
 }
+text(p[10].type,550,200);
+text(xy[1][7],550,250);
+//text(p[20].canattack[1][7],550,300);
 }
 
 murder(){
