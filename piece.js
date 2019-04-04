@@ -47,6 +47,13 @@ if(this.died==false){
 			p.ckgreen(this.x,this.y-1);
 			p.ckgreen(this.x-1,this.y-1);
 			this.pressed=1;
+			p.ckgreen(this.x+1,this.y);
+			p.ckgreen(this.x-1,this.y);
+			p.ckgreen(this.x+1,this.y+1);
+			p.ckgreen(this.x,this.y+1);
+			p.ckgreen(this.x+1,this.y-1);
+			p.ckgreen(this.x,this.y-1);
+			p.ckgreen(this.x-1,this.y-1);
 			}
 			if(this.type=="white"&&lockwhite==false){
 			p.ckgreen(this.x+1,this.y);
@@ -58,6 +65,13 @@ if(this.died==false){
 			p.ckgreen(this.x,this.y-1);
 			p.ckgreen(this.x-1,this.y-1);
 			this.pressed=1;
+			p.ckgreen(this.x+1,this.y);
+			p.ckgreen(this.x-1,this.y);
+			p.ckgreen(this.x+1,this.y+1);
+			p.ckgreen(this.x,this.y+1);
+			p.ckgreen(this.x+1,this.y-1);
+			p.ckgreen(this.x,this.y-1);
+			p.ckgreen(this.x-1,this.y-1);
 			}
 			
 		}
@@ -77,9 +91,7 @@ else{
 	this.x=-100;
 	this.y=-100;
 	this.img.position(this.x*60+120,this.y*60+120);
-		if(this.l==true){
-	p.remove_green();
-	this.l==false}
+		
 }
 		//stroke(0,200,0);
 
@@ -90,7 +102,7 @@ else{
 		if(this.type=="white"&&lockwhite==false){
      for (let j=1;j<9;j++){
 		for (let l=1;l<9;l++){
-		if(this.gx[j]=="green"&&this.gy[l]=="green" && ((j!=this.x)||(l!=this.y)) &&xy[j][l]=="green"||this.canattack[j][l]==true&&((j!=this.x)||(l!=this.y))   ){
+		if((this.gx[j]=="green"&&this.gy[l]=="green" && ((j!=this.x)||(l!=this.y)) &&xy[j][l]=="green")||this.canattack[j][l]==true&&((j!=this.x)||(l!=this.y))   ){
 				fill(0,255,0);
 					
 			rect(j*60,l*60,60,60);
@@ -115,7 +127,7 @@ else{
 		if(this.type=="black"&&lockblack==false){
      for (let j=1;j<9;j++){
 		for (let l=1;l<9;l++){
-		if(this.gx[j]=="green"&&this.gy[l]=="green" && ((j!=this.x)||(l!=this.y)) &&(xy[j][l]=="green"||[j][l]==true)   ){
+		if(this.gx[j]=="green"&&this.gy[l]=="green" && ((j!=this.x)||(l!=this.y)) &&xy[j][l]=="green"||this.canattack[j][l]==true&&((j!=this.x)||(l!=this.y))   ){
 				fill(0,255,0);
 					
 			rect(j*60,l*60,60,60);
@@ -206,7 +218,7 @@ else{
 					
 				}
 				else{
-					
+					p.ckgreen(this.x+j,this.y+j);
 				j=10;
 				}}}}
 				//move down left
@@ -218,7 +230,7 @@ else{
 					
 				}
 				else{
-					
+					p.ckgreen(this.x-j,this.y+j);
 				j=10;
 				}}}}
 				//move up left
@@ -230,7 +242,7 @@ else{
 					
 				}
 				else{
-					
+					p.ckgreen(this.x-j,this.y-j);
 				j=10;
 				}}}}
 				//move up right
@@ -243,7 +255,7 @@ else{
 				}
 				else{
 					
-					
+				p.ckgreen(this.x+j,this.y-j);	
 				j=10;
 				}}}}
 				
@@ -257,7 +269,7 @@ else{
 					
 				}
 				else{
-					
+					p.attackrange(this.x-j,this.y);
 				j=10;
 				
 				}}}
@@ -270,7 +282,7 @@ else{
 					
 				}
 				else{
-					
+				p.attackrange(this.x,this.y-j);	
 					
 				j=10;
 				}}}
@@ -283,7 +295,7 @@ else{
 					
 				}
 				else{
-					
+					p.attackrange(this.x+j,this.y);
 				j=10;
 				}}}
 				//move left
@@ -295,7 +307,7 @@ else{
 					
 				}
 				else{
-					
+					p.attackrange(this.x-j,this.y);
 				j=10;
 				}}}
 			}		
@@ -334,11 +346,19 @@ if(this.died==false){
 			p.ckgreen(this.x-2,this.y-1);
 			p.ckgreen(this.x+2,this.y+1);
 			p.ckgreen(this.x+2,this.y-1);
+			p.attackrange(this.x-2,this.y+1);
+			p.attackrange(this.x-2,this.y-1);
+			p.attackrange(this.x+2,this.y+1);
+			p.attackrange(this.x+2,this.y-1);
 			
 			p.ckgreen(this.x+1,this.y-2);
 			p.ckgreen(this.x-1,this.y-2);
 			p.ckgreen(this.x+1,this.y+2);
 			p.ckgreen(this.x-1,this.y+2);
+			p.attackrange(this.x+1,this.y-2);
+			p.attackrange(this.x-1,this.y-2);
+			p.attackrange(this.x+1,this.y+2);
+			p.attackrange(this.x+1,this.y+2);
 			}	
 			}
 		}
@@ -356,9 +376,7 @@ else{
 	this.x=-100;
 	this.y=-100;
 	this.img.position(this.x*60+120,this.y*60+120);
-		if(this.l==true){
-	p.remove_green();
-	this.l==false}
+		
 }
 	}
 	bish(p){
@@ -386,9 +404,7 @@ if(this.died==false){
 					
 				}
 				else{
-					if(([this.x+j][this.y+j]=="trueWhite"&&lockwhite==false)||([this.x+j][this.y+j]=="trueBlack"&&lockblack==false)){
-					p.ckgreen(this.x+j,this.y+j);	
-					}
+					p.attackrange(this.x+j,this.y+j);
 				j=10;
 				}}}}
 				//move down left
@@ -400,9 +416,7 @@ if(this.died==false){
 					
 				}
 				else{
-					if(([this.x-j][this.y+j]=="trueWhite"&&lockwhite==false)||([this.x-j][this.y+j]=="trueBlack"&&lockblack==false)){
-					p.ckgreen(this.x-j,this.y+j);	
-					}
+					p.attackrange(this.x-j,this.y+j);
 				j=10;
 				}}}}
 				//move up left
@@ -414,7 +428,7 @@ if(this.died==false){
 					
 				}
 				else{
-					
+				p.attackrange(this.x-j,this.y-j);
 				j=10;
 				}}}}
 				//move up right
@@ -426,7 +440,7 @@ if(this.died==false){
 					
 				}
 				else{
-					
+					p.attackrange(this.x+j,this.y-j);
 					
 				j=10;
 				}}}}
@@ -448,9 +462,7 @@ if(this.type=="white"){
 	this.x=-100;
 	this.y=-100;
 	this.img.position(this.x*60+120,this.y*60+120);
-		if(this.l==true){
-	p.remove_green();
-	this.l=false}
+	
 	}
 
 		
@@ -478,7 +490,7 @@ if(this.died==false){
 					
 				}
 				else{
-					
+					p.attackrange(this.x,this.y+j);
 				j=10;
 				
 				}}}
@@ -490,10 +502,9 @@ if(this.died==false){
 					p.ckgreen(this.x,this.y-j);
 					
 				}
-				else{
+				else{						
+				p.attackrange(this.x,this.y-j);				
 					
-					p.ckgreen(this.x,this.y-j);	
-					}
 				j=10;
 				}}}
 				//move right
@@ -505,7 +516,8 @@ if(this.died==false){
 					
 				}
 				else{
-					
+				p.attackrange(this.x+j,this.y)				
+
 					
 				j=10;
 				}}}
@@ -518,7 +530,7 @@ if(this.died==false){
 					
 				}
 				else{
-					
+	p.attackrange(this.x-j,this.y)				
 					
 				j=10;
 				}}}
@@ -526,23 +538,24 @@ if(this.died==false){
 				this.pressed=1;	
 			}
 				
-	
+		}	
 		this.img.position(this.x*60+120,this.y*60+120);
 			if(this.type=="white"){
-		 xy[this.x][this.y]="green";
+		 xy[this.x][this.y]="white";
 			}
 			else{
 						xy[this.x][this.y]="black";
 			}
-}
-		else{
+
+}	
+	else{
 	this.x=-100;
 	this.y=-100;
 	this.img.position(this.x*60+120,this.y*60+120);
-		if(this.l==true){
-	p.remove_green();
-	this.l=false}
+	
 }	
+	
+	
 	}
 	pong(p){
 	if(this.h==0){
@@ -601,18 +614,20 @@ else{
 	this.x=-100;
 	this.y=-100;
 	this.img.position(this.x*60+120,this.y*60+120);
-	if(this.l==true){
-	p.remove_green();
-	this.l==false}
+	
 	
 	
 }		
 	}
 	attackrange(x,y){
+		if(x>0&&y>0&&x<10&&y<10){
 		if((xy[x][y]=="black"&&this.type=="white")||(xy[x][y]=="white"&&this.type=="black")){
 		this.canattack[x][y]=true;
 		}
-
+  else{
+	  this.canattack[x][y]=false;
+  }
+	}
 	}
 	display(){
 		

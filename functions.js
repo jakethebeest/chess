@@ -200,18 +200,21 @@ text(xy[1][7],550,250);
 murder(){
 for(let j=1;j<17;j++){
 for(let l=17;l<33;l++){
-if(p[j]!="nill"&&p[l]!="nill"){
+if(p[j].died!=true&&p[l].died!=true){
 if(p[j].x==p[l].x&&p[j].y==p[l].y&&j!=l){
 		
 	if(lockblack==true){
+		p[l].remove_green();
 p[l].died=true;
-xy[p[l].x][p[l].y]=="empty";
 
+p[l].remove_green();
 
 	}	
 	if(lockwhite==true){
+		p[l].remove_green();
 p[j].died=true;
-xy[p[j].x][p[j].y]=="empty";
+
+p[j].remove_green();
 	}	
 	
 }
