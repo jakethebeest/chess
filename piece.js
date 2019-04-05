@@ -23,7 +23,7 @@ this.canattack[j][l]==false;
 this.died=false;
 }	
 	
-	king(p){
+	king(p,p2,p3){
 		
 		if(this.h==0){
 			if(this.type=="white"){
@@ -54,6 +54,7 @@ if(this.died==false){
 			p.ckgreen(this.x+1,this.y-1);
 			p.ckgreen(this.x,this.y-1);
 			p.ckgreen(this.x-1,this.y-1);
+			
 			}
 			if(this.type=="white"&&lockwhite==false){
 			p.ckgreen(this.x+1,this.y);
@@ -72,7 +73,9 @@ if(this.died==false){
 			p.ckgreen(this.x+1,this.y-1);
 			p.ckgreen(this.x,this.y-1);
 			p.ckgreen(this.x-1,this.y-1);
+			
 			}
+			
 			
 		}
 
@@ -99,6 +102,7 @@ else{
 	
 	
 	move(p){
+		if(this.died!=true){
 		if(this.type=="white"&&lockwhite==false){
      for (let j=1;j<9;j++){
 		for (let l=1;l<9;l++){
@@ -115,7 +119,8 @@ else{
 			this.x=j;
 			this.y=l;
 			this.pressed=0;
-			p.remove_green()
+			p.clearattackrange();
+			p.remove_green();
 	 	  this.k++;
 		  
 			}
@@ -139,7 +144,8 @@ else{
 			this.x=j;
 			this.y=l;
 			this.pressed=0;
-			p.remove_green()
+			p.clearattackrange();
+			p.remove_green();
 	 	  this.k++;
 		  
 			}
@@ -147,6 +153,7 @@ else{
 
 	 }
 	 }
+		}
 		}
 }
 
@@ -194,9 +201,9 @@ else{
 				return false;
 			}
 		}
-	
-	queen(p){
-		if(this.h==0){
+
+queen(p){
+if(this.h==0){
 			if(this.type=="white"){
 			this.img=createImg("queen.png");
 			}
@@ -207,61 +214,11 @@ else{
 		this.h=1;
 	}
 
+if(this.died==false){
 		if(p.ckrange(this.x,this.y)||this.pressed==1){
 			if((this.type=="white"&&lockwhite==false)||(this.type=="black"&&lockblack==false)){
-			// move down right
+
 			for(let j=1;j<8;j++){
-				if(this.x+j<9){
-				if(this.y+j<9){
-				if(xy[this.x+j][this.y+j]=="empty"){
-					p.ckgreen(this.x+j,this.y+j);
-					
-				}
-				else{
-					p.ckgreen(this.x+j,this.y+j);
-				j=10;
-				}}}}
-				//move down left
-		   for(let j=1;j<8;j++){
-				if(this.x-j>0){
-				if(this.y+j<9){
-				if(xy[this.x-j][this.y+j]=="empty"){
-					p.ckgreen(this.x-j,this.y+j);
-					
-				}
-				else{
-					p.ckgreen(this.x-j,this.y+j);
-				j=10;
-				}}}}
-				//move up left
-		   for(let j=1;j<8;j++){
-				if(this.x-j>0){
-				if(this.y-j>0){
-				if(xy[this.x-j][this.y-j]=="empty"){
-					p.ckgreen(this.x-j,this.y-j);
-					
-				}
-				else{
-					p.ckgreen(this.x-j,this.y-j);
-				j=10;
-				}}}}
-				//move up right
-		   for(let j=1;j<8;j++){
-				if(this.x+j<9){
-				if(this.y-j>0){
-				if(xy[this.x+j][this.y-j]=="empty"){
-					p.ckgreen(this.x+j,this.y-j);
-					
-				}
-				else{
-					
-				p.ckgreen(this.x+j,this.y-j);	
-				j=10;
-				}}}}
-				
-				
-				
-				for(let j=1;j<8;j++){
 				
 				if(this.y+j<9){
 					if(xy[this.x][this.y+j]=="empty"){
@@ -269,7 +226,7 @@ else{
 					
 				}
 				else{
-					p.attackrange(this.x-j,this.y);
+					p.attackrange(this.x,this.y+j);
 				j=10;
 				
 				}}}
@@ -281,8 +238,8 @@ else{
 					p.ckgreen(this.x,this.y-j);
 					
 				}
-				else{
-				p.attackrange(this.x,this.y-j);	
+				else{						
+				p.attackrange(this.x,this.y-j);				
 					
 				j=10;
 				}}}
@@ -295,7 +252,9 @@ else{
 					
 				}
 				else{
-					p.attackrange(this.x+j,this.y);
+				p.attackrange(this.x+j,this.y)				
+
+					
 				j=10;
 				}}}
 				//move left
@@ -307,23 +266,90 @@ else{
 					
 				}
 				else{
-					p.attackrange(this.x-j,this.y);
+	p.attackrange(this.x-j,this.y)				
+					
 				j=10;
 				}}}
-			}		
+
+				this.pressed=1;	
+				
+				
+				
+			// move down right
+			for(let j=1;j<8;j++){
+				if(this.x+j<9){
+				if(this.y+j<9){
+				if(xy[this.x+j][this.y+j]=="empty"){
+					p.ckgreen(this.x+j,this.y+j);
+					
+				}
+				else{
+					p.attackrange(this.x+j,this.y+j);
+				j=10;
+				}}}}
+				//move down left
+		   for(let j=1;j<8;j++){
+				if(this.x-j>0){
+				if(this.y+j<9){
+				if(xy[this.x-j][this.y+j]=="empty"){
+					p.ckgreen(this.x-j,this.y+j);
+					
+				}
+				else{
+					p.attackrange(this.x-j,this.y+j);
+				j=10;
+				}}}}
+				//move up left
+		   for(let j=1;j<8;j++){
+				if(this.x-j>0){
+				if(this.y-j>0){
+				if(xy[this.x-j][this.y-j]=="empty"){
+					p.ckgreen(this.x-j,this.y-j);
+					
+				}
+				else{
+				p.attackrange(this.x-j,this.y-j);
+				j=10;
+				}}}}
+				//move up right
+		   for(let j=1;j<8;j++){
+				if(this.x+j<9){
+				if(this.y-j>0){
+				if(xy[this.x+j][this.y-j]=="empty"){
+					p.ckgreen(this.x+j,this.y-j);
+					
+				}
+				else{
+					p.attackrange(this.x+j,this.y-j);
+					
+				j=10;
+				}}}}
 		this.pressed=1;	
-		
+					}
 		}
-		this.img.position(this.x*60+120,this.y*60+120);
-	if(this.type=="white"){
-				xy[this.x][this.y]="white";
-	}
-	else{
-				xy[this.x][this.y]="black";
-	}
+				
+				
+				
+			
+	this.img.position(this.x*60+120,this.y*60+120);
+if(this.type=="white"){
+			xy[this.x][this.y]="white";
+	
+}
+		else{
+					xy[this.x][this.y]="black";
+		}
+}
+		else{
+	this.x=-100;
+	this.y=-100;
+	this.img.position(this.x*60+120,this.y*60+120);
 	
 	}
-	
+
+
+
+}	
 	
 	
 	knight(p){
@@ -628,6 +654,13 @@ else{
 	  this.canattack[x][y]=false;
   }
 	}
+	}
+	clearattackrange(){
+		for(let j=1;j<10;j++){
+		for(let l=1;l<10;l++){
+		this.canattack[j][l]=false;	
+		}
+		}
 	}
 	display(){
 		

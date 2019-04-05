@@ -156,7 +156,7 @@ if(p[4]!="nill"){
 p[4].queen(p[4]);
 }
 if(p[5]!="nill"){
-p[5].king(p[5]);
+p[5].king(p[5],p[1],p[8]);
 }
 if(p[6]!="nill"){
 p[6].bish(p[6]);
@@ -181,7 +181,7 @@ if(p[28]!="nill"){
 p[28].queen(p[28]);
 }
 if(p[29]!="nill"){
-p[29].king(p[29]);
+p[29].king(p[29],p[25],p[32]);
 }
 if(p[30]!="nill"){
 p[30].bish(p[30]);
