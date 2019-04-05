@@ -47,13 +47,14 @@ if(this.died==false){
 			p.ckgreen(this.x,this.y-1);
 			p.ckgreen(this.x-1,this.y-1);
 			this.pressed=1;
-			p.ckgreen(this.x+1,this.y);
-			p.ckgreen(this.x-1,this.y);
-			p.ckgreen(this.x+1,this.y+1);
-			p.ckgreen(this.x,this.y+1);
-			p.ckgreen(this.x+1,this.y-1);
-			p.ckgreen(this.x,this.y-1);
-			p.ckgreen(this.x-1,this.y-1);
+			p.attackrange(this.x+1,this.y);
+			p.attackrange(this.x-1,this.y);
+			p.attackrange(this.x+1,this.y+1);
+			p.attackrange(this.x,this.y+1);
+			p.attackrange(this.x-1,this.y+1);
+			p.attackrange(this.x+1,this.y-1);
+			p.attackrange(this.x,this.y-1);
+			p.attackrange(this.x-1,this.y-1);
 			
 			}
 			if(this.type=="white"&&lockwhite==false){
@@ -66,13 +67,14 @@ if(this.died==false){
 			p.ckgreen(this.x,this.y-1);
 			p.ckgreen(this.x-1,this.y-1);
 			this.pressed=1;
-			p.ckgreen(this.x+1,this.y);
-			p.ckgreen(this.x-1,this.y);
-			p.ckgreen(this.x+1,this.y+1);
-			p.ckgreen(this.x,this.y+1);
-			p.ckgreen(this.x+1,this.y-1);
-			p.ckgreen(this.x,this.y-1);
-			p.ckgreen(this.x-1,this.y-1);
+			p.attackrange(this.x+1,this.y);
+			p.attackrange(this.x-1,this.y);
+			p.attackrange(this.x+1,this.y+1);
+			p.attackrange(this.x,this.y+1);
+			p.attackrange(this.x-1,this.y+1);
+			p.attackrange(this.x+1,this.y-1);
+			p.attackrange(this.x,this.y-1);
+			p.attackrange(this.x-1,this.y-1);
 			
 			}
 			
